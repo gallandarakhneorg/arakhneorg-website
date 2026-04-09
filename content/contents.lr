@@ -6,4 +6,4 @@ body:
 
 This website was created in 2001 by Stéphane Galland. It is a place where you could find several open-source software that are written or published by him or the other contributors to Arakhnê.org.
 
-You could also find get these contributions through the Ubuntu packages or your Maven server dedicated to the development versions of our projects.
+You could also find these contributions through the [Ubuntu packages](./linux/ubuntu) or our [Maven server](./java/maven-repository) dedicated to the development versions of our projects.
