@@ -1,0 +1,15 @@
+title: TeX-Templates 20260406
+---
+pub_date: 2026-04-06
+---
+page: /latex/tex-templates
+---
+description:
+
+* **CIAD Technical Report:**
+  1. Add the macro `\addfundingschemelogo` and the class option `[no]fundingschemelogo`. The macro permits to add an image is a list of logos of the institutions that are funding the works in relation with the document. The class option permits to show/hide these logos on the front page.
+  2. Set the default page style to "headings" in order to have the correct rendering of the headers and footers of the pages.
+  3. Change the default baseline stretch to 1.25 to have a easier reading.
+* ** General:**
+  4. Fixing the content of the README.
+

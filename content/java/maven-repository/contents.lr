@@ -1,0 +1,75 @@
+title: Maven Repository
+---
+subtitle: Accessing to Arakhnê.org development snapshots and third-party packages
+---
+frameworks: Maven2
+---
+pub_date: 2026-04-08
+---
+body:
+
+### 1. What is maven?
+
+[Apache Maven](http://maven.apache.org/) is a software project management and comprehension tool. Based on the concept of a project object 
+model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
+
+Maven's primary goal is to allow a developer to comprehend the complete state of a development effort in the shortest period of time. 
+In order to attain this goal there are several areas of concern that Maven attempts to deal with:
+
+* Making the build process easy
+* Providing a uniform build system
+* Providing quality project information
+* Providing guidelines for best practices development
+* Allowing transparent migration to new features
+
+[More details](http://maven.apache.org/what-is-maven.html)
+
+### 2. Maven Repository provided by {{ config.PROJECT.name }}
+
+{{ config.PROJECT.name }} is providing a Maven repository inside which the {{ config.PROJECT.name }}'s Java libraries are published in their development versions. The release versions of these libraries are published on the [Maven Central server](https://central.sonatype.com/).
+
+To use the {{ config.PROJECT.name }}'s Maven repository, you may put inside the `pom.xml` file of your project:
+
+```xml
+<repositories>
+  <repository>
+    <id>org.arakhne-maven</id>
+    <name>Arakhne.org Snapshots</name>
+    <url>{{ config.PROJECT.maven_repository }}</url>
+  </repository>
+</repositories>
+
+```
+
+### 3. Third-Party Maven artifacts provided by {{ config.PROJECT.name }}
+
+{{ config.PROJECT.name }} website is also providing several Maven packages that are not available on the Central Maven Repository:
+
+
+The {{ config.PROJECT.name }} website is also providing several Maven packages that are not available on the Central Maven Repository.
+
+#### Java 3D
+
+* Source: https://java3d.dev.java.net/
+* Provided packages:
+  * `javax:vecmath:1.5.2`
+  * `javax:j3d-core-utils:1.5.2`
+  * `javax:j3d-core:1.5.2`
+ 
+#### LuaJ
+
+* Source: http://sourceforge.net/projects/luaj/
+* Version 2.0.2:
+  * `org.luaj:luaj-jse:2.0.2.patched_for_janus.1`
+  * `org.luaj:luaj-jme:2.0.2.patched_for_janus.1`
+* Version 3.0-beta1:
+  * `org.luaj:luaj-jse:3.0.b1.patched_for_janus.1`
+  * `org.luaj:luaj-jme:3.0.b1.patched_for_janus.1`
+
+#### migcalendar
+
+* Source: http://migcalendar.com/
+* Provided packages:
+  * `com.migcalendar:migcalendar:6.9.3`
+  * `com.migcalendarbean:migcalendar:6.9.3`
+

@@ -1,0 +1,26 @@
+[project]
+name = Arakhnê.org
+output_path = ../test
+maven_repository = https://arakhne.org/download/maven
+
+[children]
+model = project
+order_by = name
+
+[packages]
+lektor-jinja-content = 0.4.4
+lektor-markdown-highlighter = 0.3.2
+
+[theme_settings]
+copyright_date = 2026
+base_name = Arakhnê
+extension_name = .org
+name = Stéphane Galland
+email =
+about =
+site = Arakhnê.org
+githubID = gallandarakhneorg
+linkedInURL = http://linkedin.com/in/sgalland
+profilepicture = https://avatars.githubusercontent.com/u/4200154?v=4&size=512
+comments = no
+

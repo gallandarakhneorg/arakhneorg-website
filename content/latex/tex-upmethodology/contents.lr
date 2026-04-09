@@ -1,0 +1,187 @@
+title: TeX-UPmethodology
+---
+subtitle: Class for writing nice and pretty reports
+---
+languages: LaTeX
+---
+version: 50.1
+---
+pub_date: 2026-04-06
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+github: https://github.com/gallandarakhneorg/tex-upmethodology/
+---
+github_name: tex-upmethodology
+---
+ubuntu: ../../linux/ubuntu
+---
+ctan_package: upmethodology
+---
+license: LGPL3
+---
+license_info: https://opensource.org/licenses/lgpl-3-0
+---
+body:
+
+TeX-UPmethodology is a LaTeX style which permits to create  documents and reports with version, history, authors, validators, specification, task management, etc., as for the reports in a Unified Process methodology (UP or RUP).
+
+**TeX-UPmethodology could be used to write documents that are not related to the UP methodology.** For example, the project [TeX-templates](../tex-templates/) uses TeX-UPmethology for building PhD dissertations and technical reports.
+
+### 1. Available Styles
+
+Several styles are already provided for direct download or as packages.
+
+CAUTION: Several of them are under proprietary licenses. You are granted to use, modify or redistribute them under the terms of these proprietary licenses.
+
+|Type | Name | Infos | Usage Restrictions | Examples | Ubuntu |
+|-----|------|-------|--------------------|----------|--------|
+| Report | classic | Included | [LGPL](http://www.gnu.org/copyleft/lesser.html) | ![front](./classic_frontcover.jpg) ![page](./core_page.jpg) | `tex-upmethodology` |
+| Report | modern | Included | [LGPL](http://www.gnu.org/copyleft/lesser.html) | ![front](./modern_frontcover.jpg) ![page](./core_page.jpg) | `tex-upmethodology` |
+| Report | Université de Technologie de Belfort-Montbéliard (UTBM) | [Open](../tex-templates/) | &copy; UTBM | ![front](./ciadreport_frontcover.jpg) ![page](./ciadreport_page.jpg) ![page](./ciadreport_backcover.jpg) | `tex-templates-utbmciadreport-2025` |
+| PhD dissertation | Université de Technologie de Belfort-Montbéliard (UTBM) | [Open](../tex-templates/) | &copy; UTBM | ![front](./spimutbm_frontcover.jpg) ![page](./spimutbm_page.jpg) ![page](./spimutbm_backcover.jpg) | `tex-templates-utbm-phdthesis` |
+| PhD dissertation | Université Bourgogne Europe (UBE) | [Open](../tex-templates/) | &copy; UBE | ![front](./spimube_frontcover.jpg) ![page](./spimube_page.jpg) ![page](./spimube_backcover.jpg) | `tex-templates-ube-phdthesis` |
+| PhD dissertation | Université Marie et Louis Pasteur (UMLP)| [Open](../tex-templates/) | &copy; UMLP | ![front](./spimumlp_frontcover.jpg) ![page](./spimumlp_page.jpg) ![page](./spimumlp_backcover.jpg) | `tex-templates-umlp-phdthesis` |
+| HDR dissertation | Université Bourgogne Europe (UBE) | [Open](../tex-templates/) | &copy; UBE | ![front](./hdrube_frontcover.jpg) ![page](./spimube_page.jpg) ![page](./spimube_backcover.jpg) | `tex-templates-spimhdr` |
+
+
+### 2. Create your own style
+
+You could create you own style by following the following steps.
+
+#### 2.1. Header and Copyright
+
+Find the logo of your university in SVG or PDF format. We recommend to have the logo in vectorial format, not bitmap.
+
+Create the _.cfg_ file that describes the new style elements. The format of this file is TeX. It contains the elements in this section and the following. Define the copyright string of your extension in French and English:
+   
+```latex
+\DeclareCopyright[french]{extension-name}{copyright-year}{author-name}{legal-text}
+\DeclareCopyright[english]{extension-name}{copyright-year}{author-name}{legal-text}
+```
+
+Where:
+* `extension-name` is the code name of your extension;
+* `copyright-year` is the year(s) of the copyright;
+* `author-name` is the name(s) of the extension's authors;
+* `legal-text` is a text that is describing the copy rights.
+
+#### 2.2. LaTeX Package Inclusion
+
+You could include any LaTeX package that is needed by your extension, for example:
+  
+```latex
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+```
+
+#### 2.3. Redefine the colors
+
+The style has many predefined colors. You could adapt them to your own style by using the macros `\definecolor` or `\colorlet` from the `xcolor` package, for example:
+   
+```latex
+\definecolor{mycolor}{rgb}{0.62890625,0.0546875,0.18359375}
+```
+
+The major colors that could be redefined are:
+* `algorithmboder`: the color of the borders of the algorithms;
+* `algorithmcaption`: the color of the text for the descriptions of the algorithms;
+* `algorithmcaptionlabel`: the color of the text that is displayed for the labels of the algorithms, e.g., `Algorithm 1`;
+* `backpagetext`: the color of the text that is displayed on the back page;
+* `backpagetitle`: the color of the titles that are displayed on the back page;
+* `bibemphemphtextcolor`: the color of the text that is emphazing in the bibliogaphy, usually the titles;
+* `chaptertitlecolor`: the color of the text of a chapter's title;
+* `chaptertitlenumcolor`: the color of the chapter's number in the chapter's title;
+* `contributionbackground`: the background color of the boxes `\begin{contribution}\end{contribution}`;
+* `contributiontitle`: the text color of the boxes `\begin{contribution}\end{contribution}`;
+* `definitionbackground`: the background color of the `definition` environment;
+* `definitionborder`: the color of the border lines and the title's background of the `definition` environment;
+* `definitionheaderforeground`: the color of the title for the title of the `definition` environment;
+* `definitiontextforeground`: the color of the text in the `definition` environment;
+* `emphboxbackground`: the background color of the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`;
+* `emphboxbackgroundb`: the background color of the secondary emphazing boxes, e.g., `\begin{emphbox2}\end{emphbox2}`;
+* `emphboxbackgroundc`: the background color of the third-level emphazing boxes, e.g., `\begin{emphbox3}\end{emphbox3}`;
+* `emphboxborder`: the color of the borders of the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`;
+* `emphboxtext`: the text color in the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`;
+* `emphemphtextcolor`: the color of the text that is marked with very emphazing, i.e., with `\Emph{}`;
+* `emphtextcolor`: the color of the text that is marked with emphazing, i.e., with `\emph{}`;
+* `floatexplanationforeground`: the color of the explanation's text for floats (figures and tables);
+* `floatsourceforeground`: the color of the source's text for floats (figures and tables);
+* `frontpagetitle`: the color of the title on the front page;
+* `frontpageauthors`: the standard of the author's name on the front page;
+* `objectivebackground`: the background color of the boxes `\begin{objective}\end{objective}`;
+* `objectivetitle`: the text color of the boxes `\begin{objective}\end{objective}`;
+* `paragraphtitlecolor`: the color of the text of a paragraph's title;
+* `parttitlecolor`: the color of the text of a part's title;
+* `researchquestionbackground`: the background color of the boxes `\begin{researchquestion}\end{researchquestion}`;
+* `researchquestiontitle`: the text color of the boxes `\begin{researchquestion}\end{researchquestion}`;
+* `sectiontitleboxcolor`: the background color of the box in which the section's number are written in the section's title;
+* `sectiontitlecolor`: the color of the text of a section's title;
+* `sectiontitlenumcolor`: the color of the section's number in the section's title;
+* `standardphdcolor`: the major color that is associated to the style. This color is usually used as the base for many of the other colors;
+* `subparagraphtitlecolor`: the color of the text of a subparagraph's title;
+* `subsectiontitlecolor`: the color of the text of a sub-section's title;
+* `subsectiontitlenumcolor`: the color of the sub-section's number in the sub-section's title;
+* `subsubsectiontitlecolor`: the color of the text of a sub-sub-section's title;
+* `tablebackground`: the background color of the cells in a table or a tabular that are not header cells;
+* `tableforeground`: the text color in the cells in a table or a tabular that are not header cells;
+* `tableheaderbackground`: the background color of headers and titles in a table or a tabular;
+* `tableheaderforeground`: the text color in headers and titles in a table or a tabular;
+* `tablerule`: the color of the rules of table or a tabular;
+
+#### 2.4. Define the layout of the front page
+
+The front page has a specific layout. Usually, it is implemented using the `TikZ` package and associated macros. The definition of the front page must be done using the macro `\Set{cfontpage}{latex-code}`. For example:
+  
+```latex
+\Set{cfrontpage}{
+	\pagestyle{empty}
+	\begin{picture}(0,0)
+		\put(-45,-60){\parbox[t][12cm][t]{17cm}{
+			\renewcommand{\baselinestretch}{1} 
+			\begin{center}
+				{\Large \theauthorlist} \\[1.5cm]
+
+				\parbox{\linewidth}{\centering\Large\nohyphens{\theupmproject}}
+				\Ifnotempty\theupmdocname{\\[.25cm]\parbox{\linewidth}{\centering\large\nohyphens{\theupmdocname}}}
+			\end{center}
+		}}
+	\end{picture}
+}
+```
+
+#### 2.5. Define the layout of the back page
+
+The back page has a specific layout. Usually, it is also implemented using the `TikZ` package and associated macros. The definition of the back page must be done using the macro `\Set{backpage}{latex-code}`. For example:
+   
+```latex
+\Set{cfrontpage}{
+	\pagestyle{empty}
+	\begin{picture}(0,0)
+		\put(-45,-60){\parbox[t][12cm][t]{17cm}{
+			\nohyphens{\ignorespaces\theupmproject}
+		}}
+	\end{picture}
+}
+```
+
+#### 2.6. Create the LaTeX class
+
+In order to make your style easy to be used, it is recommended to create a LaTeX class (_.cls_ file) that describes the new style class. The format of this file is TeX. This class could be defined to help any user of your style to use it easily. This class file may contain the loading of the inherited class, and the loading of your style, for example:
+
+```latex
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesClass{extension-name}[2026/04/06]
+
+\LoadClass[french]{upmethodology-document}
+\UseExtension{extension-name}
+
+\endinput
+```
+
+Where:
+
+* `extension-name` is the name of your style.
+
+
+

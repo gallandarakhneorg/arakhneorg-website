@@ -1,0 +1,94 @@
+title: TeX-templates
+---
+subtitle: Reports, PhD Dissertations, Slides, Articles
+---
+languages: LaTeX
+---
+version: 2026/04/06
+---
+pub_date: 2026-04-06
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+github: https://github.com/gallandarakhneorg/tex-templates/
+---
+github_name: tex-templates
+---
+ubuntu: ../../linux/ubuntu
+---
+license: LGPL3
+---
+license_info: https://opensource.org/licenses/lgpl-3-0
+---
+body:
+
+TeX-templates is a collection of LaTeX styles for different usages.
+All these templates could be downloaded or installed with one of the provided [Ubuntu packages]({{ this.ubuntu }}).
+
+### 1. Slides
+
+TeX-templates provides styles for creating slides with the Beamer tool.
+
+| Description | Info | Examples | Ubuntu |
+|-------------|------|----------|--------|
+| [CIAD Laboratory](https://ciad-lab.fr) located at the [Université de Technologie de BelfortMontbéliard](http://www.utbm.fr) and the [Université Bourgogne Europe](http://www.ube.fr) |  Documentation and example are included: [download](../../download/latex/slides - beamer/ciadslides.tar.gz) | ![front](./ciadslides_front.jpg) ![page](./ciadslides_page.jpg) | `tex-templates-ciad-beamer` |
+
+
+### 2. PhD Dissertations
+
+TeX-templates provides the styles for writing a PhD thesis dissertations with the **official styles from the [SPIM Doctoral School](https://spim.ubfc.fr/)**.
+
+| Description | Info | Examples | Ubuntu |
+|-------------|------|----------|--------|
+| [Université de Technologie de Belfort-Montbéliard](http://www.utbm.fr) | Documentation and examples are included: [download](../../download/latex/phd - these/spimutbmphdthesis.tar.gz) | ![front](./spimutbm_frontcover.jpg) ![page](./spimutbm_page.jpg) ![page](./spimutbm_backcover.jpg) | `tex-templates-utbm-phdthesis` |
+| [Université Bourgogne Europe](http://www.ube.fr) | Documentation and examples are included: [download](../../download/latex/phd - these/spimubephdthesis.tar.gz) | ![front](./spimube_frontcover.jpg) ![page](./spimube_page.jpg) ![page](./spimube_backcover.jpg) | `tex-templates-ube-phdthesis` |
+| [Université Marie et Louis Pasteur](http://www.umlp.fr) | Documentation and examples are included: [download](../../download/latex/phd - these/spimumlpphdthesis.tar.gz) | ![front](./spimumlp_frontcover.jpg) ![page](./spimumlp_page.jpg) ![page](./spimumlp_backcover.jpg) | `tex-templates-umlp-phdthesis` |
+
+### 3. French Research Supervision Accreditation
+
+TeX-templates provides the **unofficial styles** for preparing a French Research Supervision Accredidation (In French: Habilitation à diriger des rerchers - HDR).
+
+| Description | Info | Examples | Ubuntu |
+|-------------|------|----------|--------|
+| [Université Bourgogne Europe](http://www.ube.fr) - Dissertation | Documentation and examples are included: [download](../../download/latex/hdr/spimubehdr.tar.gz) | ![front](./hdrube_frontcover.jpg) ![page](./spimube_page.jpg) ![page](./spimube_backcover.jpg) | `tex-templates-spimhdr` |
+| [Université Bourgogne Europe](http://www.ube.fr) - Application report | Documentation and examples are included: [download](../../download/latex/hdr/spimubehdrapplication.tar.gz) | ![front](./hdrube_frontcover.jpg) ![page](./spimube_page.jpg) ![page](./spimube_backcover.jpg) | `tex-templates-spimhdr` |
+
+
+### 3. Technical Reports
+
+TeX-templates provides the styles for writing the technical reports.
+
+| Description | Info | Examples | Ubuntu |
+|-------------|------|----------|--------|
+| [CIAD Laboratory](https://ciad-lab.fr) at [UTBM](http://www.utbm.fr) | Documentation and examples are included: [download](../../download/latex/reports/utbmciadreport-2025.tar.gz) | ![front](./ciadreport_frontcover.jpg) ![page](./ciadreport_page.jpg) ![page](./ciadreport_backcover.jpg) | `tex-templates-utbmciadreport-2025` |
+
+
+### 4. Scientific Articles
+
+TeX-templates provides the styles for writing articles for specific events.
+
+| Description | Info | Examples | Ubuntu |
+|-------------|------|----------|--------|
+| IngéDoc at [UTBM](http://www.utbm.fr) " | Documentation and examples are included: [download]({{ this.github }}/papers/ingedoc) | ![front](./ingedoc.jpg) | `tex-templates-ingedoc` |
+
+
+### 5. Installation
+
+#### 5.1. In the folder of your document
+
+The most simple way to use the templates is to download the archive and uncompress it in the folder of yor document. LaTeX will automatically find the template's files in the folder of your LaTeX document.
+
+#### 5.2. In the operating system
+
+1. For the report and dissertation styles, first, install [TeX-UPmethodology](../tex-upmethodology) (also available on CTAN, and included in the major TeX distributions)
+
+* Download the archive and uncompress it.
+* Copy the content of the archive inside one of your `texmf` directory, usually `/usr/share/texmf/tex/latex/tex-templates` or `$HOME/.texmf` on Unix operating systems.
+* Update the LaTeX databases from the command line:
+
+```bash
+mktexlsr
+update-updmap --quiet
+```
+
+

@@ -1,0 +1,6 @@
+_model: redirect
+---
+target: /java/maven3
+---
+_discoverable: no
+

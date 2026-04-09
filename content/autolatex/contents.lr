@@ -1,0 +1,6 @@
+_model: redirect
+---
+target: /latex/autolatex
+---
+_discoverable: no
+

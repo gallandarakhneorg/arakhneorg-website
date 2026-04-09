@@ -1,0 +1,8 @@
+{% macro render_news_post(post) %}
+  <div class="news-short">
+    <span class="title"><a href="{{ post|url }}">{{ post.title }}</a></span>
+    {% if post.pub_date %}
+    <span class="date">{{ post.pub_date }}</span>
+    {% endif %}
+  </div>
+{% endmacro %}

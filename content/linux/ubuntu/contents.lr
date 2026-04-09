@@ -1,0 +1,41 @@
+title: Ubuntu Package Repository
+---
+subtitle: Software packages for Ubuntu or Debian
+---
+pub_date: 2026-04-09
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+body:
+
+{{ config.PROJECT.name }} provides a repository of Ubuntu packages that you could use for installing the various {{ config.PROJECT.name }} software.
+
+### 1. Direct download from the archive pool
+
+The sources tarballs and the Debian/Ubuntu packages could be directly downloaded from the [Ubuntu repository](../../download/pool/).
+
+### 2. Supported Ubuntu Versions
+
+| Version | Name | Architectures | Publication Date | End-of-Support Date |
+|---------|------|---------------|------------------|---------------------|
+| 20.04 LTS | Focal Fossa | amd64, others | April, 2020 | April, 2025 |
+| 22.04 LTS | Jammy Jellyfish | amd64, others | April, 2022 | April, 2027 |
+| 24.04 LTS | Noble Numbat | amd64, others | April, 2025 | June 2029 |
+| 24.10 | Oracular Oriole | amd64, others | October, 20124 | July, 2025 |
+
+Where:
+
+* LTS means Long Time Support.
+* The officially supported architecture is amd64. The other architectures i386, ia64 and powerpc are provided for user convenience without any warranty. The support for other Ubuntu architectures is not yet planned.
+
+
+{{ config.PROJECT.name }} supports are mapped to [release schedules](https://wiki.ubuntu.com/Releases) provided by Ubuntu teams.
+
+### 3. Get the Configuration Files for APT
+
+The recent Debian and Ubuntu systems use the content of the folders `/etc/apt/sources.list.d` and `/etc/apt/trusted.gpg.d` for configurating their package managers.
+
+You could download and copy the following file for accessing to the {{ config.PROJECT.name }} package repository. This file contains the specification of the server's URL and also includes the key needed to recognized the source. It means that you don't need to create a file in `/etc/apt/trusted.gpg.d`; but simply copy the file in `/etc/apt/sources.list.d`.
+
+* [`/etc/apt/sources.list.d/arakhne.sources`](./arakhne.sources)
+

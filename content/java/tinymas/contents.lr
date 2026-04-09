@@ -1,0 +1,53 @@
+title: TinyMAS
+---
+subtitle: The Tiny Multi-Agent Platform
+---
+languages: Java
+---
+version: 6.7
+---
+pub_date: 2013-11-17
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg, Nicolas Gaud:https://github.com/ngaud
+---
+github: https://github.com/gallandarakhneorg/tinymas/
+---
+github_name: tinymas
+---
+documentation: ./apidocs/index.html
+---
+license: LGPL 2.1
+---
+license_info: https://opensource.org/licenses/lgpl-2-1
+---
+requires: Java 11:https://www.java.com
+---
+maven_groupid: org.arakhne.tinymas
+---
+maven_artifactid : vmutils
+---
+compliances: Maven:http://maven.apache.com, Java:https://www.java.com
+---
+body:
+
+The Tiny Multiagent Platform is a very small platform which permits to  implement and run agent-based systems.
+
+This platform was written by [Stéphane GALLAND](/contributors/galland) and [Nicolas GAUD](/contributors/gaud) for  the multiagent courses of the [Computer Science Department of the University of Technology of Belfort-Montbéliard](https://www.utbm.fr).
+
+The Tiny Multiagent Platform contains the following projects:
+
+* `org.arakhne.tinyMAS.core`: the core implementation of the  platform including kernel, scheduler, white pages, yellow pages, agents,  environment, influence and perception.
+* `org.arakhne.tinyMAS.network`: an extension of the tinyMAS platform  that supports kernels distributed on a network.
+* `org.arakhne.tinyMAS.situatedEnvironment`: an extension of the tinyMAS  core platform that provides features for situated environments: environment, body,  perception and influence.
+* `org.arakhne.tinyMAS.demo`: demos that illustrate several features  of the tinyMAS platform.
+
+### Another language and platform: SARL and Janus
+
+tinyMAS is dedicated to students. If you are searching for an industry-ready platform, please take a look at the:
+
+[![SARL agent programming language](./sarl.png)](https://www.sarl.io)
+
+[![Janus Platform v2 or higher](./janus-logo-v2.jpg)](https://www.sarl.io/runtime/janus/)
+
+[![Janus Platform v1](./janus-logo-v1.jpg)](https://github.com/sarl/janus_version_1)
+

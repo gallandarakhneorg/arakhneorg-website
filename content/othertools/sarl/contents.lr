@@ -1,0 +1,39 @@
+title: SARL Agent Programming Language
+---
+subtitle: General purpose language for coding multiagent systems
+---
+languages: SARL, Java
+---
+version: 0.15.0
+---
+pub_date: 2025-09-12
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg, https://github.com/ngaud, Sebastian Rodriguez:https://github.com/srodriguez
+---
+github: https://github.com/sarl/sarl
+---
+license: Apache License 2
+---
+license_info: https://opensource.org/licenses/Apache-2.0
+---
+requires: Java 21:https://www.java.com
+---
+maven_groupid: io.sarl.lang
+---
+maven_artifactid : core
+---
+compliances: Maven:http://maven.apache.com, Java:https://www.java.com
+---
+body:
+
+[SARL](https://www.sarl.io) is a statically-typed agent-programming language. SARL aims at providing the fundamental abstractions for dealing with concurrency, distribution, interaction, decentralization, reactivity, autonomy and dynamic reconfiguration. These high-level features are now considered as the major requirements for an easy and practical implementation of modern complex software applications. We are convinced that the agent-oriented paradigm holds the keys to effectively meet this challenge.
+
+**This page provides only Debian/Ubuntu packages of SARL compiler and Janus platform.**
+
+The available Debian packages are:
+
+* `sarl-compiler`: provides the `sarlc` command line. It is the SARL compiler.
+* `janus-platform`: provides the `janus` command line. It is the Janus SARL run-time environment.
+
+To have access to these packages, please follow the instruction for installing the [Ubuntu repository](../../linux/ubuntu).
+

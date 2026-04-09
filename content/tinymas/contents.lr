@@ -1,0 +1,6 @@
+_model: redirect
+---
+target: /java/tinymas
+---
+_discoverable: no
+

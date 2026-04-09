@@ -1,0 +1,16 @@
+title: AutoLaTeX 50.0
+---
+pub_date: 2026-04-02
+---
+page: /latex/autolatex
+---
+description:
+
+Because the Perl implementation of AutoLaTeX is no more maintained, and Perl is less used than Python, I have decided to re-implement AutoLaTeX in Python 3.
+
+The version `50.0` is the first public release of the Python implementation.
+
+It provides the samel features as the Perl implementation and adds new command lines actions and options.
+
+The support for graphical user interfaces or editors is removed.
+

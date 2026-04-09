@@ -1,0 +1,10 @@
+org.arakhne.tinyMAS.core
+org.arakhne.tinyMAS.demo.preypredator1
+org.arakhne.tinyMAS.demo.preypredator2
+org.arakhne.tinyMAS.demo.preypredator3
+org.arakhne.tinyMAS.network
+org.arakhne.tinyMAS.situatedEnvironment.agent
+org.arakhne.tinyMAS.situatedEnvironment.body
+org.arakhne.tinyMAS.situatedEnvironment.environment
+org.arakhne.tinyMAS.situatedEnvironment.influence
+org.arakhne.tinyMAS.situatedEnvironment.perception

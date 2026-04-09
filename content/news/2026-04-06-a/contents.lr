@@ -1,0 +1,12 @@
+title: TeX-UPmethodology 20260406
+---
+pub_date: 2026-04-06
+---
+page: /latex/tex-upmethodology
+---
+description:
+
+The titles of the sections are correctly rendered when the text of the title is not one multiple lines. As soon as the section's title in on multiple lines, the rendering of the section title becomes incorrect.
+
+This version fixes this issue by expanding the vertical size of the section's title graphical box.
+

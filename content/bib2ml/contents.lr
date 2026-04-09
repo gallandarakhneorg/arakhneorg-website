@@ -1,0 +1,6 @@
+_model: redirect
+---
+target: /latex/bib2ml
+---
+_discoverable: no
+

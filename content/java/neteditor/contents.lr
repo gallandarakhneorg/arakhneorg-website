@@ -1,0 +1,662 @@
+title: NetEditor
+---
+subtitle: Library and Editor for Visual Graph-Based Languages
+---
+languages: Java
+---
+version: 17.0
+---
+pub_date: 2013-10-24
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+github: https://github.com/gallandarakhneorg/neteditor/
+---
+github_name: neteditor
+---
+license: LGPL3
+---
+license_info: https://opensource.org/license/lgpl-3-0
+---
+documentation: ./apidocs/index.html
+---
+requires: Java 11:https://www.java.com
+---
+compliances: Java:https://www.java.com
+---
+body:
+
+The {{ config.PROJECT.name }} Network Editor (NetEditor) is a free Java component that permits to edit and show connected-graphs. NetEditor is only composed by a drawing area in which you can draw nodes and edges.
+
+NetEditor supports the following features:
+
+* **separation of the visual-language constructs and the drawings**;
+* graphical editing of the graph structure;
+* algorithms to laying out the figures (Sugiyama-like and force-based algorithms);
+* depth levels for nodes and egdes;
+* can undoing and redoing user actions;
+* clipboard and Drag&Drop management;
+* exporting into graphical formats : GIF, JPEG, PNG, BMP;
+* exporting into vectorial formats : SVG, PDF, Encapsulated Postscript, PDF, Graphviz DOT, GXL, GraphML, GML;
+* Save and load into GML, GraphML, GXL, or NGR (zipped GML/GraphML/GXL) files.
+
+
+This version of NetEditor is an original idea of Mahdi HANNOUN and Stéphane GALLAND. In 2001, we decide to develop a new graph-editing library because existing ones don't support our needs, or are to difficult to extend.
+
+![NetEditor Screenshot](./neteditor_screen.png)
+
+Note that the groupId and the artifactId of Maven modules to include can be found in the API document.
+
+### 1. Download
+
+Because NetEditor is a Maven project, we recommend to use our Maven repository as explained in the page on the [{{ config.PROJECT.name }} Maven repository](../maven-repository/).
+
+If you do not want to use Maven, you should dowload the Jar file manually:
+
+* All the Jar files of the NetEditor library are available on the [Maven repository](../../download/maven/org/arakhne/neteditor/).
+* The NetEditor library depends on the additional library: [{{ config.PROJECT.name }} Foundation Classes](../afc/).
+
+### 2. Language Constructs Specification
+
+NetEditor is designed to create editors for Visual Languages. NetEditor assumes the language constructs is separated than the graphical representations of these constructs. NetEditor also assumes all the language constructs is expressed with a graph composed with the three following concepts:
+
+* **Node:** a node is a point in a graph. A node is linked to other nodes throough edges;
+* **Edge:** an edge a connection between two nodes. An edge may be directed or not. An edge is not directly linked to nodes but to the anchors of the nodes. An edge has a start anchor and an end anchor;
+* **Anchor:** an anchor is a connection point between a node and an edge. An anchor is defined inside a single node. Many edge could be connected to one anchor.
+
+
+The language of the diagram that should be edited by NetEditor must be defined with Java classes that are extending the node, edge and anchor classes.
+
+### 3. Language Constructs Figures
+
+Each language construct (node, edge and anchor) may be associated to one graphical representation (also named the view of the construct). This graphical representation is in charge of the rendering of the construct's information on on a Java panel.
+
+### 4. Example: a simple Finite State Machine editor
+
+This section contains a tutorial that permits to create a simple Finite State Machine based on the NetEditor library that is illustrated by the figure above. The definition of a new language's editor should follow the steps:
+
+* definition of the language constructs;
+* definition of the figures;
+* definition of the factories;
+* graphical user interface.
+
+#### 4.1. Definition of the language constructs
+
+The maven module related to this step is: `org.arakhne.neteditor.fsm:fsm-constructs`.
+The Finite State Machine language is composed of the constructs: state, transitions, start point, end point.
+
+##### i) Definition of the abstraction for all the nodes of the FSM
+
+The FSM diagram contains three types of nodes: state, end point, and start point. It is recommended to create an abstract class that is common to all the implementations of these nodes. Each node of an FSM contains only one anchor.
+
+```java
+package org.arakhne.neteditor.fsm.constructs ;
+
+import org.arakhne.neteditor.formalism.standard.StandardMonoAnchorNode;
+
+public class AbstractFSMNode extends StandardMonoAnchorNode<FiniteStateMachine,AbstractFSMNode,FSMAnchor,FSMTransition> {
+
+	public AbstractFSMNode() {
+		super(new Anchor());
+	}
+
+}
+
+```
+
+The `AbstractFSMNode` class extends the class `StandardMonoAnchorNode`, which is the implementation of a node with a single anchor inside. The generic parameters are the types of the graph, node, anchor and transition supported by the implementation (here the FSM classes). The constructor of the super class takes an instance of anchor as parameter. The `FSMAnchor` is used.
+
+The `AbstractFSMNode` class permits to simplify the use of the generic parameters.
+
+##### ii) State Definition
+
+The FSM state is defined in the class `FSMState`. A state has a name, an action to execute when entering inside the state, and action to execute when exiting from the state, and an action when staying in the state.
+
+```java
+package org.arakhne.neteditor.fsm.constructs ;
+
+import java.io.IOException;
+import java.util.Map;
+
+public class FSMState extends AbstractFSMNode {
+
+	private String enterAction = null;
+	private String insideAction = null;
+	private String exitAction = null;
+	
+	public FSMState() {
+		super();
+	}
+	
+	public String getEnterAction() {
+		return this.enterAction;
+	}
+
+	public void setEnterAction(String action) {
+		String na = (action==null || action.isEmpty()) ? null : action;
+		if ((this.enterAction==null && na!=null)||
+			(this.enterAction!=null && !this.enterAction.equals(na))) {
+			String old = this.enterAction;
+			this.enterAction = na;
+			firePropertyChanged("enterAction", old, this.enterAction);
+		}
+	}
+	
+	public String getExitAction() {
+		return this.exitAction;
+	}
+
+	public void setExitAction(String action) {
+		String na = (action==null || action.isEmpty()) ? null : action;
+		if ((this.exitAction==null && na!=null)||
+			(this.exitAction!=null && !this.exitAction.equals(na))) {
+			String old = this.exitAction;
+			this.exitAction = na;
+			firePropertyChanged("exitAction", old, this.exitAction);
+		}
+	}
+
+	public String getAction() {
+		return this.insideAction;
+	}
+
+	public void setAction(String action) {
+		String na = (action==null || action.isEmpty()) ? null : action;
+		if ((this.insideAction==null && na!=null)||
+			(this.insideAction!=null && !this.insideAction.equals(na))) {
+			String old = this.insideAction;
+			this.insideAction = na;
+			firePropertyChanged("insideAction", old, this.insideAction);
+		}
+	}
+
+	@Override
+	public Map<String, Object> getProperties() {
+		Map<String,Object> properties = super.getProperties();
+		properties.put("enterAction", this.enterAction);
+		properties.put("insideAction", this.insideAction);
+		properties.put("exitAction", this.exitAction);
+		return properties;
+	}
+	
+	@Override
+	public void setProperties(Map<String, Object> properties)
+			throws IOException {
+		super.setProperties(properties);
+		if (properties!=null) {
+			setEnterAction(propGet(String.class, "enterAction", this.enterAction, properties));
+			setExitAction(propGet(String.class, "exitAction", this.exitAction, properties));
+			setAction(propGet(String.class, "insideAction", this.insideAction, properties));
+		}
+	}
+
+}
+
+```
+
+* The class `FSMState` extends the abstract FSM node class.
+* Three attributes are added to store the three actions for the state.
+* The getter functions are added for each of the three attributes.
+* The setter functions are added for each of the three attributes. Note that the attributes are assumed to be properties of `FSMState`. If the setter functions are firing property-change events when the value of an attribute is changing.
+* To properly save and load a `FSMState` class from an external file, we must override the functions `getProperties` and `setProperties`. The values of the three attributes must be replied and set by these functions, respectively. Note that the function `propGet` is an utility function provided by the super class. It permits to retreive the properties and cast it to the proper type in one call. Do not forget to invoke the super implementations.
+
+##### iii) Transition Definition
+
+The FSM transition is defined in the class `FSMTransition`. A transition has a name, an action to execute when transition is traversed, and a guard (a condition) that must be true to traverse the transition.
+
+```java
+package org.arakhne.neteditor.fsm.constructs ;
+
+import java.io.IOException;
+import java.util.Map;
+
+import org.arakhne.neteditor.formalism.standard.StandardEdge;
+
+public class FSMTransition
+extends StandardEdge<FiniteStateMachine,AbstractFSMNode,FSMAnchor,FSMTransition> {
+
+	private String action = null;
+	private String guard = null;
+	
+	public FSMTransition() {
+		super();
+	}
+	
+	public String getAction() {
+		return this.action;
+	}
+
+	public void setAction(String action) {
+		String na = (action==null || action.isEmpty()) ? null : action;
+		if ((this.action==null && na!=null) ||
+			(this.action!=null && !this.action.equals(na))) {
+			String old = this.action;
+			this.action = na;
+			firePropertyChanged("action", old, this.action);
+		}
+	}
+
+	public String getGuard() {
+		return this.guard;
+	}
+
+	public void setGuard(String guard) {
+		String ng = (guard==null || guard.isEmpty()) ? null : guard;
+		if ((this.guard==null && ng!=null) ||
+			(this.guard!=null && !this.guard.equals(ng))) {
+			String old = this.guard;
+			this.guard = ng;
+			firePropertyChanged("guard", old, this.guard);
+		}
+	}
+	
+	@Override
+	public Map<String, Object> getProperties() {
+		Map<String,Object> properties = super.getProperties();
+		properties.put("action", this.action);
+		properties.put("guard", this.guard);
+		return properties;
+	}
+	
+	@Override
+	public void setProperties(Map<String, Object> properties)
+			throws IOException {
+		super.setProperties(properties);
+		if (properties!=null) {
+			setAction(propGet(String.class, "action", null, properties));
+			setGuard(propGet(String.class, "guard", null, properties));
+		}
+	}
+	
+	@Override
+	public String getExternalLabel() {
+		StringBuilder label = new StringBuilder();
+		String guard = getGuard();
+		if (guard!=null) {
+			label.append(guard);
+		}
+		String action = getAction();
+		if (action!=null) {
+			label.append("/");
+			label.append(action);
+		}
+		return label.toString();
+	}
+	
+	public void setStartNode(FSMState node) {
+		FSMAnchor anchor = null;
+		if (node!=null && !node.getAnchors().isEmpty()) {
+			anchor = node.getAnchors().get(0);
+		}
+		setStartAnchor(anchor);
+	}
+	
+	public void setEndNode(FSMState node) {
+		FSMAnchor anchor = null;
+		if (node!=null && !node.getAnchors().isEmpty()) {
+			anchor = node.getAnchors().get(0);
+		}
+		setEndAnchor(anchor);
+	}
+
+}
+
+```
+
+* The `FSMTransition` class extends the class `StandardEdge`, which is the implementation of an edge. The generic parameters are the types of the graph, node, anchor and transition supported by the implementation (here the FSM classes).
+* Three attributes are added to store the action and the guard.
+* The getter functions are added for each of the two attributes.
+* The setter functions are added for each of the two attributes. Note that the attributes are assumed to be properties of `FSMTransition`. If the setter functions are firing property-change events when the value of an attribute is changing.
+* To properly save and load a `FSMTransition` class from an external file, we must override the functions `getProperties` and `setProperties`. The values of the three attributes must be replied and set by these functions, respectively. Note that the function `propGet` is an utility function provided by the super class. It permits to retreive the properties and cast it to the proper type in one call. Do not forget to invoke the super implementations.
+* To help the developer to connect the  `FSMTransition` to two `FSMState` instances, two helpful functions are added: `setStartNode` and `setEndNode`. These functions set the start anchor and the end anchor of the edge to the single anchor of given nodes.
+
+##### iv) Start-Point Definition
+
+The FSM start point is the point from which the simulation of the FSM must start. It is not a state by itself, but it is an `AbstractFSMNode` because it should be link to other FSM nodes with FSM transitions.
+
+```java
+package org.arakhne.neteditor.fsm.constructs ;
+
+public class FSMStartPoint extends AbstractFSMNode {
+
+	public FSMStartPoint() {
+		super();
+	}
+
+}
+
+```
+
+* The class `FSMStartPoint` extends the abstract FSM node class.
+
+##### v) End-Point Definition
+
+The FSM end point is the point at which the simulation of the FSM is stopping. It is not a state by itself, but it is an `AbstractFSMNode` because it should be link to other FSM nodes with FSM transitions.
+
+```java
+package org.arakhne.neteditor.fsm.constructs ;
+
+public class FSMEndPoint extends AbstractFSMNode {
+
+	public FSMEndPoint() {
+		super();
+	}
+
+}
+
+```
+
+* The class `FSMEndPoint` extends the abstract FSM node class.
+
+##### vi) Anchor Definition
+
+The anchor is a construct provided by the NetEditor library to help to define how the edges and the nodes are connected. The implementation of the anchor must defined functions that permits to test if a node and an edge could be connected together.
+
+```java
+package org.arakhne.neteditor.fsm.constructs ;
+
+import org.arakhne.neteditor.formalism.standard.StandardAnchor;
+
+public class FSMAnchor extends StandardAnchor<FiniteStateMachine,AbstractFSMNode,FSMAnchor,FSMTransition> {
+
+	public FSMAnchor() {
+		super();
+	}
+	
+	@Override
+	public boolean canConnectAsEndAnchor(FSMTransition edge,
+			FSMAnchor startAnchor) {
+		if (getNode() instanceof FSMStartPoint) {
+			return false;
+		}
+		if (getNode() instanceof FSMEndPoint) {
+			if (startAnchor!=null) {
+				return startAnchor.getNode() instanceof FSMState;
+			}
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean canConnectAsStartAnchor(FSMTransition edge,
+			FSMAnchor endAnchor) {
+		if (getNode() instanceof FSMEndPoint) {
+			return false;
+		}
+		if (getNode() instanceof FSMStartPoint) {
+			if (endAnchor!=null) {
+				return endAnchor.getNode() instanceof FSMState;
+			}
+		}
+		return true;
+	}
+	
+}
+
+```
+
+* The class `FSMAnchor` extends the `StandardAnchor`, which is providing a standard implementation for anchors.
+* The function `canConnectAsStartAnchor` must be overridden to specify when an `AbstractFSMNode` can be connected to the start of a `FSMTransition`. The start of a `FSMTransition` cannot be a `FSMEndPoint`. If the current anchor is binded to a `FSMStartPoint` then the other side of the `FSMTransition` must be a `FSMState` to accept the connection. In all the other cases, the connection is accepted.
+* The function `canConnectAsEndAnchor` must be overridden to specify when an `AbstractFSMNode` can be connected to the end of a `FSMTransition`. The end of a `FSMTransition` cannot be a `FSMStartPoint`. If the current anchor is binded to a `FSMEndPoint` then the other side of the `FSMTransition` must be a `FSMState` to accept the connection. In all the other cases, the connection is accepted.
+
+##### vii) Finite-State-Machine Graph Definition
+
+The class that is representing the FSM is `FiniteStateMachine`. According to the NetEditor library, the class `FiniteStateMachine` is a type of graph and it extends `StandardGraph` with the appropriate generic parameters.
+
+```java
+package org.arakhne.neteditor.fsm.constructs ;
+
+import org.arakhne.neteditor.formalism.standard.StandardGraph;
+
+public class FiniteStateMachine
+extends StandardGraph<FiniteStateMachine,AbstractFSMNode,FSMAnchor,FSMTransition> {
+
+	public FiniteStateMachine() {
+		super();
+	}
+	
+}
+
+```
+
+#### 4.2. Definition of the language figures
+
+The maven module related to this step is: `org.arakhne.neteditor.fsm:fsm-figures`. All the language constructs should have a figure to be rendered.
+
+##### i) Definition of figure for FSMEndPoint
+
+The figure class `FSMEndPoint` extends the class `CircleNodeFigure` which the implementation of a circle provided by the NetEditor library.
+
+```java
+package org.arakhne.neteditor.fsm.figures ;
+
+import java.awt.Color;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.util.UUID;
+
+import org.arakhne.neteditor.fig.figure.node.CircleNodeFigure;
+import org.arakhne.neteditor.fig.graphics.ViewGraphics2D;
+import org.arakhne.neteditor.fsm.constructs.FSMAnchor;
+import org.arakhne.neteditor.fsm.constructs.FSMEndPoint;
+
+public class FSMEndPointFigure extends CircleNodeFigure<FSMEndPoint,FSMAnchor> {
+
+	public FSMEndPointFigure(UUID viewId, float x, float y) {
+		super(viewId, x, y);
+		setResizeDirections();
+		setMinimalDimension(20, 20);
+		setMaximalDimension(20, 20);
+	}
+	
+	public FSMEndPointFigure(UUID viewId) {
+		this(viewId, 0, 0);
+	}
+
+	@Override
+	protected void paintNode(ViewGraphics2D g) {
+		g.beginGroup();
+		super.paintNode(g);
+		Rectangle2D figureBounds = g.getCurrentViewBounds();
+		Ellipse2D oval = new Ellipse2D.Float(
+				(float)figureBounds.getX() + 5,
+				(float)figureBounds.getY() + 5,
+				(float)figureBounds.getWidth() - 10,
+				(float)figureBounds.getHeight() - 10);
+		g.setInteriorPainted(true);
+		g.setOutlineDrawn(false);
+		Color old = g.setFillColor(g.getOutlineColor());
+		g.draw(oval);
+		g.setFillColor(old);
+		g.endGroup();
+	}
+
+}
+
+```
+
+* The function `paintNode` must be overridden to draw the end point in a proper way.
+* The graphical context is not a AWT `Graphics2D` instance, but is is a `ViewGraphics2D` instance. Why? First, `Graphics2D` is not dedicated to vectorial drawing, and `ViewGraphics2D` is. Second, `Graphics2D` is an AWT implementation, and `ViewGraphics2D` is platform-independent (AWT, Android...).
+* The `ViewGraphics2D` graphical context distinguishes the outline and the interior of a draw. The function `draw` is able to draw the outline and the interior at the same time. The functions `setInteriorPainted` and `setOutlineDrawn` permits to enable or disable the drawing of the interior and the outline, respectively. In opposite to the famous `Graphics2D`, which has one current color, the `ViewGraphics2D` distinguishes the color used to draw the outline and the color used to draw the interior.
+* The function `getCurrentViewBounds` permits to retreive the bounds of the figure.
+* The functions `beginGroup` and `endGroup` permits to group the drawn element into a single draw. Grouping is very useful when the figure should be exported into vectorial formats such as SVG.
+
+##### ii) Definition of the figures
+
+The figures for the `FSMStartPoint`, `FSMState`, `FSMTransition`, and `FSMAnchor` are coded in a similar way.
+
+##### iii) Definition of the figure factory
+
+The maven module related to this step is: `org.arakhne.neteditor.fsm:fsm-figures`. The NetEditor viewer requires to have a figure factory to create the figures when they are not yet associated to graph elements that may be rendered. The class `FSMFigureFactory` is the implementation of a figure factory dedicated to the FSM classes. It extends the class `AbstractStandardFigureFactory`, whish provides a standard implementation for factories.
+
+```java
+package org.arakhne.neteditor.fsm.figures ;
+
+import java.awt.geom.Dimension2D;
+import java.util.UUID;
+
+import org.arakhne.neteditor.awt.DoubleDimension;
+import org.arakhne.neteditor.fig.anchor.AnchorFigure;
+import org.arakhne.neteditor.fig.anchor.InvisibleCircleAnchorFigure;
+import org.arakhne.neteditor.fig.anchor.InvisibleRoundRectangularAnchorFigure;
+import org.arakhne.neteditor.fig.factory.AbstractStandardFigureFactory;
+import org.arakhne.neteditor.fig.factory.FigureFactoryException;
+import org.arakhne.neteditor.fig.figure.Figure;
+import org.arakhne.neteditor.fig.subfigure.SubFigure;
+import org.arakhne.neteditor.fig.view.ViewComponentConstants;
+import org.arakhne.neteditor.formalism.ModelObject;
+import org.arakhne.neteditor.formalism.Node;
+import org.arakhne.neteditor.fsm.constructs.FSMAnchor;
+import org.arakhne.neteditor.fsm.constructs.FSMEndPoint;
+import org.arakhne.neteditor.fsm.constructs.FSMStartPoint;
+import org.arakhne.neteditor.fsm.constructs.FSMState;
+import org.arakhne.neteditor.fsm.constructs.FSMTransition;
+import org.arakhne.neteditor.fsm.constructs.FiniteStateMachine;
+
+public class FSMFigureFactory extends AbstractStandardFigureFactory<FiniteStateMachine> {
+
+	/**
+	 */
+	public FSMFigureFactory() {
+		super();
+	}
+
+	@Override
+	public Figure createFigureFor(UUID viewID, FiniteStateMachine graph,
+			ModelObject object, float x, float y) throws FigureFactoryException {
+		Figure fig = null;
+		FSMAnchor anchor = null;
+		if (object instanceof FSMState) {
+			FSMState node = (FSMState) object;
+			anchor = node.getAnchors().get(0);
+			FSMStateFigure figure = new FSMStateFigure(viewID, x, y);
+			figure.setModelObject(node);
+			fig = figure;
+		}
+		else if (object instanceof FSMStartPoint) {
+			FSMStartPoint node = (FSMStartPoint) object;
+			anchor = node.getAnchors().get(0);
+			FSMStartPointFigure figure = new FSMStartPointFigure(viewID, x, y);
+			figure.setModelObject(node);
+			fig = figure;
+		}
+		else if (object instanceof FSMEndPoint) {
+			FSMEndPoint node = (FSMEndPoint) object;
+			anchor = node.getAnchors().get(0);
+			FSMEndPointFigure figure = new FSMEndPointFigure(viewID, x, y);
+			figure.setModelObject(node);
+			fig = figure;
+		}
+		if (fig!=null && anchor!=null) {
+			AnchorFigure<FSMAnchor> subfig;
+			if (fig instanceof FSMStateFigure) {
+				subfig = createStateAnchorFigure(viewID,
+					fig.getWidth(), fig.getHeight());
+			}
+			else {
+				subfig = createEndAnchorFigure(viewID,
+					Math.max(fig.getWidth(), fig.getHeight()));
+			}
+			subfig.setModelObject(anchor);
+			return fig;
+		}
+		throw new FigureFactoryException();
+	}
+
+	@Override
+	public SubFigure createSubFigureInside(UUID viewID,
+			FiniteStateMachine graph, Figure parent, ModelObject object) {
+		if (object instanceof FSMAnchor) {
+			if ((parent instanceof FSMStartPointFigure)
+				||(parent instanceof FSMEndPointFigure)) {
+				AnchorFigure<FSMAnchor> subfig = createEndAnchorFigure(viewID,
+						Math.max(parent.getWidth(), parent.getHeight()));
+				subfig.setModelObject((FSMAnchor)object);
+				return subfig;
+			}
+			if (parent instanceof FSMStateFigure) {
+				AnchorFigure<FSMAnchor> subfig = createStateAnchorFigure(viewID,
+						parent.getWidth(), parent.getHeight());
+				subfig.setModelObject((FSMAnchor)object);
+				return subfig;
+			}
+		}
+		throw new FigureFactoryException();
+	}
+
+	@Override
+	public Figure createFigureFor(UUID viewID, FiniteStateMachine graph,
+			ModelObject object, float x1, float y1, float x2, float y2) throws FigureFactoryException {
+		if (object instanceof FSMTransition) {
+			FSMTransitionFigure figure = new FSMTransitionFigure(viewID, x1, y1, x2, y2);
+			figure.setModelObject((FSMTransition)object);
+			return figure;
+		}
+		throw new FigureFactoryException();
+	}
+
+	private static AnchorFigure<FSMAnchor> createEndAnchorFigure(UUID viewID, float size) {
+		AnchorFigure<FSMAnchor> figure = new InvisibleCircleAnchorFigure<>(
+				viewID, 0, 0, size/2f);
+		return figure;
+	}
+
+	private static AnchorFigure<FSMAnchor> createStateAnchorFigure(UUID viewID, float width, float height) {
+		AnchorFigure<FSMAnchor> figure = new InvisibleRoundRectangularAnchorFigure<>(
+				viewID, 0, 0, width, height);
+		return figure;
+	}
+
+	@Override
+	protected Dimension2D getPreferredNodeSize(Node<?, ?, ?, ?> node) {
+		return new DoubleDimension(
+				ViewComponentConstants.DEFAULT_MINIMAL_SIZE,
+				ViewComponentConstants.DEFAULT_MINIMAL_SIZE);
+	}
+
+}
+
+```
+
+* The function `createFigureFor(UUID, FiniteStateMachine, ModelObject, float, float)` is invoked to create a figure for the given model object (which is always a node) at the specified position. The following implementation creates the corresponding figure for the FSM elements. If the figure to create is for a `FSMState`, then the function is also creating the figures for the `FSMAnchor`.
+* The function `createFigureFor(UUID, FiniteStateMachine, ModelObject, float, float, float, float)` is invoked to create a figure for the given model object (which is always an edge) from the specified point to the given point. The following implementation creates the corresponding figure for the FSM transition.
+* The function `createSubFigureInside(UUID, FiniteStateMachine, Figure, ModelObject)` is invoked to create the subfigure inside the given figure for the specified FSM element (usually an `FSMAnchor`).
+
+#### 4.3. Definition of an FSM Editor
+
+The maven module related to this step is: `org.arakhne.neteditor.fsm:fsm-editor`. The FSM editor is a frame that contains the NetEditor viewer, which is an instance of `JFigureViewer`. The standard way to create the editor is illustrated in the following code.
+
+```java
+package org.arakhne.neteditor.fsm ;
+
+public class FSMEditor extends JFrame {
+
+	private final JFigureViewer<FiniteStateMachine> figurePanel;
+
+	private FiniteStateMachine stateMachine;
+
+	public FSMEditor() throws IOException {
+		super(Locale.getString("TITLE"));
+
+		//...
+
+		this.stateMachine = new FiniteStateMachine();
+
+		this.figurePanel = new JFigureViewer<>(
+				FiniteStateMachine.class,
+				this.stateMachine,
+				new FSMFigureFactory(),
+				true);
+		this.figurePanel.setAxisDrawn(true);
+		add(BorderLayout.CENTER, this.figurePanel);
+
+		//...
+	}
+
+	//...
+
+}
+
+```
+
+

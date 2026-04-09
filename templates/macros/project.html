@@ -1,0 +1,107 @@
+{% macro render_project_post(post, from_index=false) %}
+  <div class="project-post">
+  {% if from_index %}
+    <h2><a href="{{ post|url }}">{{ post.title }}</a></h2>
+  {% else %}
+    <h2>{{ post.title }}</h2>
+  {% endif %}
+  <p class="meta">
+    {% if post.subtitle %}
+      {{ post.subtitle }}
+    {% endif %}
+    {% if post.version %}
+      (version: {{ post.version }})
+    {% endif %}
+  </p>
+  {% if not from_index %}
+    <p>
+    {% if post.pub_date %}
+      <img alt="Publication: {{ postpub_date }}" src="https://img.shields.io/badge/published-{{ post.pub_date|replace("-","/") }}-yellowgreen.svg?style=flat-square"></a>
+    {% endif %}
+    {% if post.maven_groupid and post.maven_artifactid %}
+      <a href="https://central.sonatype.com/search?q={{ post.maven_groupid }}"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/{{ post.maven_groupid }}/{{ post.maven_artifactid }}.svg?label=Maven%20Central"></a>
+    {% endif %}
+    {% if post.license and post.github_name %}
+      {% if post.license_info %}
+        <a href="{{ post.license_info }}"><img alt="{{ post.license }}" src="https://img.shields.io/github/license/gallandarakhneorg/{{ post.github_name }}.svg?style=flat-square"></a>      
+      {% else %}
+        <img alt="{{ post.license }}" src="https://img.shields.io/github/license/gallandarakhneorg/{{ post.github_name }}.svg?style=flat-square">
+      {% endif %}
+    {% endif %}
+    </p>
+    <p>
+    {% if post.requires %}
+      {% set requires_list = post.requires.split(',') %}
+      {% for req in requires_list %}
+        {% set components = req.split(':') %}
+        {% set label = components[0] %}
+        {% set url = ':'.join(components[1:]) %}
+        <a href="{{ url }}"><img alt="Require {{ label }}" src="https://img.shields.io/badge/requires-{{ label}}-red.svg?style=flat-square"></a>
+      {% endfor %}
+    {% endif %}
+    {% if post.compliances %}
+      {% set compliance_list = post.compliances.split(',') %}
+      {% for comp in compliance_list %}
+        {% set components = comp.split(':') %}
+        {% set label = components[0] %}
+        {% set url = ':'.join(components[1:]) %}
+        <a href="{{ url }}"><img alt="Require {{ label }}" src="https://img.shields.io/badge/compliant-{{ label}}-green.svg?style=flat-square"></a>
+      {% endfor %}
+    {% endif %}
+    </p>
+    {% if post.documentation %}
+    <p>
+      <a href="{{ post.documentation }}"><img alt="Documentation" src="https://img.shields.io/badge/documentation-API-blue.svg?style=flat-square"></a>
+    </p>
+    {% endif %}
+    {% if post.github or post.ubuntu or post.ctan_package %}
+      <ul class="list-inline list-social-icons mb-0">
+      {% if post.github %}
+        <li class="list-inline-item">
+          <a href="{{ post.github }}" target="_blank">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        </li>
+      {% endif %}
+      {% if post.ubuntu %}
+        <li class="list-inline-item">
+          <a href="{{ post.ubuntu }}" target="_blank">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-linux fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        </li>
+      {% endif %}
+      {% if post.ctan_package %}
+        <li class="list-inline-item">
+          <a href="http://www.ctan.org/pkg/{{ post.ctan_package }}" target="_blank">
+            <img src="../../img/available_on_ctan.png" alt="Available on CTAN">
+          </a>
+        </li>
+      {% endif %}
+      </ul>
+    {% endif %}
+    {% if post.author %}
+      <p><span class="authors">Authors or contributors: 
+      {% set author_list = post.author.split(',') %}
+      {% for comp in author_list %}
+        {% set components = comp.split(':') %}
+        {% set name = components[0] %}
+        {% set url = ':'.join(components[1:]) %}
+        <a href="{{ url }}">{{ name }}</a>{% if not loop.last %}, {% endif %}
+      {% endfor %}
+      </span></p>
+    {% endif %}
+	<hr/>
+ {{ post.body }}
+  {% endif %}
+  </div>
+  {% if render_disqus_comments is defined %}
+  <br>
+  <div class="comments">{{ render_disqus_comments() }}</div>
+{% endif %}
+{% endmacro %}
