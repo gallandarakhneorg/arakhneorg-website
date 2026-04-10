@@ -1,0 +1,3 @@
+[submodule "packages/lektor-webdav"]
+	path = packages/lektor-webdav
+	url = https://github.com/gallandarakhneorg/lektor-webdav
