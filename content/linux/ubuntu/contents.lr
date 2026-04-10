@@ -2,7 +2,7 @@ title: Ubuntu Package Repository
 ---
 subtitle: Software packages for Ubuntu or Debian
 ---
-pub_date: 2026-04-09
+pub_date: 2026-04-10
 ---
 author: Stéphane Galland:https://github.com/gallandarakhneorg
 ---
@@ -16,12 +16,11 @@ The sources tarballs and the Debian/Ubuntu packages could be directly downloaded
 
 ### 2. Supported Ubuntu Versions
 
-| Version | Name | Architectures | Publication Date | End-of-Support Date |
-|---------|------|---------------|------------------|---------------------|
-| 20.04 LTS | Focal Fossa | amd64, others | April, 2020 | April, 2025 |
-| 22.04 LTS | Jammy Jellyfish | amd64, others | April, 2022 | April, 2027 |
-| 24.04 LTS | Noble Numbat | amd64, others | April, 2025 | June 2029 |
-| 24.10 | Oracular Oriole | amd64, others | October, 20124 | July, 2025 |
+| Version   | Ubuntu Name       | Arakhnê.org Name | Architectures | Publication Date | End-of-Support Date |
+|-----------|-------------------|------------------|---------------|------------------|---------------------|
+| 22.04 LTS | Jammy Jellyfish   | jammy-arakhne    | amd64, others | April, 2022      | April, 2027         |
+| 24.04 LTS | Noble Numbat      | noble-arakhne    | amd64, others | April, 2025      | June 2029           |
+| 25.10     | Questing Quokka   | questing-arakhne | amd64, others | October, 2025    | July, 2026          |
 
 Where:
 
