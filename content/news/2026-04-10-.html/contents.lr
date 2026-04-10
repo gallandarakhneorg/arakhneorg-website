@@ -1,0 +1,35 @@
+title: Website refactoring
+---
+pub_date: 2026-04-10
+---
+page: /
+---
+description:
+
+We have migrated the {{ config.PROJECT.name }} website from the outdated static site generator `awebgen` (originally from {{ config.PROJECT.name }} and written in Perl) to [**Lektor**](https://www.getlektor.com), another flexible static site generator but written in Python.
+
+As part of this migration, we also performed a thorough cleanup of the site's content. Several software projects, drivers, and tutorial pages that had become obsolete or were no longer maintained have been removed. The following items are no longer available on the new website:
+
+* Ubuntu driver for 3dxware
+* Ubuntu driver for SteelSeries Arctis 5 headset
+* Ubuntu package for Astah* editor
+* awebgen (the old generator itself)
+* Ubuntu driver for the Epson Perfection 2580 scanner
+* gpreparegallery (tool for preparing photo galleries)
+* kernel-cleaner (tool for removing old Ubuntu kernels)
+* Tutorial pages for:  
+  * Acer Aspire 1682  
+  * Dell M400  
+  * Dell Studio 14  
+  * Sony VAIO AR21B  
+  * Ricoh webcams Linux driver (r5u870)
+  * IPW2200 Wi-Fi card  
+* Several extensions for MediaWiki
+* Ubuntu driver for Microsoft fonts
+* phpdocgen (PHP API documentation generator)
+* uml2svg converter
+* xmi2svg converter
+
+This cleanup allows us to focus on more relevant and up-to-date content.
+
+We apologize for any inconvenience caused by the removal of legacy resources, but encourage users to look for alternative, actively maintained solutions where needed.
