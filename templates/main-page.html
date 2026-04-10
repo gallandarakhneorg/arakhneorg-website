@@ -16,15 +16,18 @@
       <p class="mb-5">{{this.body}}</p>   
       {% include "includes/social_row.html" %}
     </div>
-    <div class="my-auto">
-      <div class="news-short-list">
-      	<span class="title">News:</span>
-  {% for child in this.pagination.items %}
-    {{ render_news_post(child) }}
-  {% endfor %}
-  	<span class="footer"><a href="/news/">All News</a></a>
+    {% set recent_news = site.query('/news').order_by('-pub_date', 'title').limit(5) %}
+    {% if recent_news %}
+      <div class="my-auto">
+        <div class="news-short-list">
+          <span class="title">News:</span>
+            {% for child in recent_news %}
+              {{ render_news_post(child) }}
+            {% endfor %}
+  	  <span class="footer"><a href="/news/">All News</a></a>
+        </div>
       </div>
-    </div>
+    {% endif %}
   </section>
 </div>
 {% endblock %}

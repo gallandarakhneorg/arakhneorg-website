@@ -1,0 +1,16 @@
+title: TeX-Templates 20260410
+---
+pub_date: 2026-04-10
+---
+page: /latex/tex-templates
+---
+description:
+
+The [TeX-UPmethodology](/latex/tex-upmethodology) has been released with a new API for configuring the watermark text. This watermark text is used when the document is marked with restricted accesses with `\upmrestricted` for example.
+
+This new release of TeX-UPmethodology implies the following changes in TeX-Templates:
+
+* **CIAD Technical Report:**
+  1. Redefine the value of the color `watermarkcolor` to the UTBM orange.
+  2. Force the scaling factor of the watermark text to 1.
+

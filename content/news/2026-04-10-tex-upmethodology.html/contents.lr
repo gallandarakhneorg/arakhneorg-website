@@ -1,0 +1,16 @@
+title: TeX-UPmethodology 20260410
+---
+pub_date: 2026-04-10
+---
+page: /latex/tex-upmethodology
+---
+description:
+
+TeX-UPmethodology already proposed to define a status for the document.
+The status "restricted" implies the drawing of a watermark on the background of each page.
+
+Before version 20260410, it was not possible to configue easily this watermark.
+From this release the following configuration elements are provided:
+
+1. The color `watermarkcolor` is defined and used for rendering the watermark text.
+2. The global variable `watermarkscale` is defined and used for scaling the watermark text.
