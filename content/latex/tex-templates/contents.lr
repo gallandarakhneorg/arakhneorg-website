@@ -74,21 +74,26 @@ TeX-templates provides the styles for writing articles for specific events.
 
 ### 5. Installation
 
-#### 5.1. In the folder of your document
+#### 5.1. Inside the folder of your document
 
 The most simple way to use the templates is to download the archive and uncompress it in the folder of yor document. LaTeX will automatically find the template's files in the folder of your LaTeX document.
 
-#### 5.2. In the operating system
+#### 5.3. Inside your operating system with Ubuntu packages
+
+{{ config.PROJECT.name }} provides several [Ubuntu packages]({{ this.ubuntu }}) for automatically install the TeX-templates parts on the system. To configure the use of the {{ config.PROJECT.name }} Ubuntu repository, you have to follow the information provided on the [dedicated page]({{ this.ubuntu }}).
+
+The names of the Ubuntu packages that could be installed are given in the tables above.
+
+#### 5.2. In the operating system by hand
 
 1. For the report and dissertation styles, first, install [TeX-UPmethodology](../tex-upmethodology) (also available on CTAN, and included in the major TeX distributions)
-
-* Download the archive and uncompress it.
-* Copy the content of the archive inside one of your `texmf` directory, usually `/usr/share/texmf/tex/latex/tex-templates` or `$HOME/.texmf` on Unix operating systems.
-* Update the LaTeX databases from the command line:
+2. Download the archive of TeX-templates and uncompress it.
+3. Copy the content of the archive inside one of your `texmf` directory, usually `/usr/share/texmf/tex/latex/tex-templates` or `$HOME/.texmf` on Unix operating systems.
+4. Update the LaTeX databases from the command line:
 
 ```bash
-mktexlsr
-update-updmap --quiet
+sudo mktexlsr
+sudo update-updmap --quiet
 ```
 
 
