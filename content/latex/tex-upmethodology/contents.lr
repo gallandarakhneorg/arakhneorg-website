@@ -185,4 +185,27 @@ Where:
 * `extension-name` is the name of your style.
 
 
+### 3. Installation
+
+#### 3.1. Inside the folder of your document
+
+The most simple way to use the templates is to download the archive and uncompress it in the folder of your document. LaTeX will automatically find the template's files in the folder of your LaTeX document.
+
+#### 3.3. Inside your operating system with Ubuntu packages
+
+{{ config.PROJECT.name }} provides several [Ubuntu packages]({{ this.ubuntu }}) for automatically install the TeX-UPmethodology on the system. To configure the use of the {{ config.PROJECT.name }} Ubuntu repository, you have to follow the information provided on the [dedicated page]({{ this.ubuntu }}).
+
+The name of the Ubuntu package is `tex-upmethodology`.
+
+#### 3.2. In the operating system by hand
+
+1. Download the archive of TeX-UPmethodology and uncompress it.
+2. Copy the content of the archive inside one of your `texmf` directory, usually `/usr/share/texmf/tex/latex/tex-templates` or `$HOME/.texmf` on Unix operating systems.
+3. Update the LaTeX databases from the command line:
+
+```bash
+sudo mktexlsr
+sudo update-updmap --quiet
+```
+
 

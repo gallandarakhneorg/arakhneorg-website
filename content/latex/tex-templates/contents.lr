@@ -76,7 +76,7 @@ TeX-templates provides the styles for writing articles for specific events.
 
 #### 5.1. Inside the folder of your document
 
-The most simple way to use the templates is to download the archive and uncompress it in the folder of yor document. LaTeX will automatically find the template's files in the folder of your LaTeX document.
+The most simple way to use the templates is to download the archive and uncompress it in the folder of your document. LaTeX will automatically find the template's files in the folder of your LaTeX document.
 
 #### 5.3. Inside your operating system with Ubuntu packages
 
