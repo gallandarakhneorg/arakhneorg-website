@@ -4,9 +4,9 @@ subtitle: Automatic building large and small LaTeX documents
 ---
 languages: Python 3, LaTeX
 ---
-version: 50.1
+version: 51.0
 ---
-pub_date: 2026-04-06
+pub_date: 2026-04-13
 ---
 author: Stéphane Galland:https://github.com/gallandarakhneorg
 ---
@@ -24,7 +24,8 @@ license_info: https://opensource.org/licenses/lgpl-3-0
 ---
 requires: Python 3:https://www.python.org
 ---
-compliances: Python 3:https://www.python.org
+compliances: LaTeX:https://www.latex-project.org/,pdflatex:http://www.tug.org/applications/pdftex/,lualatex:http://www.luatex.org/,xelatex:http://scripts.sil.org/xetex,bibtex:http://www.bibtex.org/,biber: http://biblatex-biber.sourceforge.net/,biblatex:https://ctan.org/pkg/biblatex,bibunits:https://ctan.org/pkg/bibunits,multibib:https://ctan.org/pkg/multibib,makeindex: https://ctan.org/pkg/makeindex,makeglossaries:https://ctan.org/pkg/glossaries,Python 3:https://www.python.org,SVG:https://inkscape.org/,VSD:https://inkscape.org/,VDX:https://inkscape.org/,VSDX:https://inkscape.org/,FIG:https://sourceforge.net/projects/mcj/,DIA:https://wiki.gnome.org/Apps/Dia,XCF: https://imagemagick.org/,GZ:https://www.gnu.org/software/gzip/,EPS:https://ctan.org/pkg/epstopdf, DOT:https://graphviz.org/,ASTA: https://astah.net/,JUDE:https://astah.net/,JUTH:https://astah.net/,ASML:https://astah.net/products/astah-sysml,GXL:https://graphviz.org/,XMI:https://umbrello.kde.org/,PLOT:http://www.gnuplot.info/,ASY:http://asymptote.sourceforge.net/,GLE:http://www.gle-graphics.org/,TIKZ:https://tug.org/applications/pdftex/,C:https://miktex.org/,CPP: https://miktex.org/,JAVA:https://miktex.org/,PY: https://miktex.org/,PL:https://miktex.org/,RB: https://miktex.org/,LISP:https://miktex.org/,M:https://miktex.org/, ML:https://miktex.org/,SQL: https://miktex.org/
+
 ---
 body:
 
@@ -52,7 +53,7 @@ For documents, which may need to run programs to create the PDF versions of the 
 
 The process of AutoLaTeX is illustrated by the following Figure:
 
-![AutoLaTeX Typical Process](./process.png)
+![AutoLaTeX Typical Process](./process.svg)
 
 Hopefully this introduction has provided an adequate example for how AutoLaTeX can simplify the management of LaTeX-based documents. The AutoLaTeX system is simple enough for small projects and powerful enough for large projects. The remainder of this manual will provide complete documentation on the use of AutoLaTeX as well as configuration and installation instructions.
 
@@ -66,16 +67,14 @@ Hopefully this introduction has provided an adequate example for how AutoLaTeX c
 * `--[no]auto`: Enables or disables automatic figure generation using translator.
 * `--[no]biblio`: Enables or disables the bibliography tool (BibTeX, Biber, etc.) if not explicitly invoked from the command line.
 * `--continuous [sleep_duration]` or `--nocontinous`: Runs AutoLaTeX continuously, repeatedly performing the specified actions. This option causes AutoLaTeX to loop infinitely, similar to the following script (in bash):
+  ```bash
+	while 1 do
+	  autolatex "$@"
+	  sleep $sleep_duration
+	done
 
-```bash
-while 1 do
-  autolatex "$@"
-  sleep $sleep_duration
-done
-
-```
-The `sleep_duration` parameter specifies the waiting time between loops. If not provided, it defaults to 0. The `--continuous` option forces `--asyncview` to be enabled. With a compatible viewer, the display will update automatically. Some UNIX/Linux versions of `gv -watch` support this for PostScript files, which can be configured via a variable. Many other previewers require manual updates. Note: Adobe Acrobat Reader on MS-Windows locks the PDF file, preventing updates, so it is not recommended for continuous mode.
-
+  ```
+  The `sleep_duration` parameter specifies the waiting time between loops. If not provided, it defaults to 0. The `--continuous` option forces `--asyncview` to be enabled. With a compatible viewer, the display will update automatically. Some UNIX/Linux versions of `gv -watch` support this for PostScript files, which can be configured via a variable. Many other previewers require manual updates. Note: Adobe Acrobat Reader on MS-Windows locks the PDF file, preventing updates, so it is not recommended for continuous mode.
 * `--debug`: Runs AutoLaTeX with the logging level set to 'debug'. The available levels (from least to most verbose) are: off, critical, error, warning, info, fine\_info, debug, trace.
 * `--defaultist`: Allows AutoLaTeX to use MakeIndex with the default style (.ist file). The default style is provided by the AutoLaTeX distribution. The `--index` and `--noindex` options modify AutoLaTeX's behavior regarding MakeIndex.
 * `-d directory` or `--directory directory`: Specifies a directory containing a LaTeX document to compile. You can specify this option for each directory containing a LaTeX document. If not specified, the current directory is used.
@@ -136,6 +135,7 @@ The available commands are:
   * `--force`: Overwrites the _.sty_ file if it exists.
 * `commit`: Commits changes to a version control system (GIT, CVS, SVN...). The command line must be provided in the configuration file.
 * `document`: Performs all processing required to produce the _.pdf_, _.dvi_, or _.ps_ file for the document. This command is also known as `gen_doc`. Specific options are:
+  * `--force`: Force the building of all the intermediary files (bbl, idx, ind, gls, etc.) even if they are up-to-date.
   * `--nochdir`: Prevents AutoLaTeX from changing the current directory to the document's root directory before starting the build process.
 * `glossaries`: Performs all processing required to generate glossaries (makeglossaries). This command is also known as `makeglossaries`. Specific options are:
   * `--nochdir`: Prevents AutoLaTeX from changing the current directory to the document's root directory before starting the build process.

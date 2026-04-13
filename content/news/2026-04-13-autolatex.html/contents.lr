@@ -1,0 +1,21 @@
+title: AutoLaTeX 51.0
+---
+pub_date: 2026-04-13
+---
+page: /latex/autolatex
+---
+description:
+
+### Major Changes
+
+The detection of TeX errors and warnings has been completely overhauled. Previously, the extraction of error and warning messages from the TeX log file was incorrect, often displaying invalid text. All log‑related code is now grouped into a single class, which properly identifies errors and warnings, and cleans up the formatting of warning messages.
+
+The build process has been refactored to be more dynamic. Instead of computing a fixed execution sequence based solely on file timestamps and static dependencies, the new approach builds a sequence of tools without considering timestamps. Each tool in the sequence first determines whether it needs to run based on actual content changes, and then runs only if necessary. This allows the process to adapt to state changes caused by tools themselves. The execution list construction, file generation algorithm, and builder class definitions have all been reworked. Additionally, the build now starts automatically when an image is updated, and a new `showbuildprocess` command has been added for transparency. A bug affecting auxiliary file names when using `bibunits` has also been fixed.
+
+Detection of the need to rebuild the document has been improved. The TeX log analyzer now correctly recognises the `"Rerun the LaTeX compile"` message, and the PDF builder’s rebuild detection has been fixed. These changes complement the build process refactor to ensure that recompilation is triggered only when truly necessary.
+
+### Other Changes and Bug Fixes
+
+Internal bugs in the TeX parser have been resolved, including the parsing of macros with both optional and mandatory arguments, as well as an exception inside the citation analyzer for auxiliary files.
+
+The installation script has been adapted to meet CTAN standards, ensuring that the distribution source archive is generated correctly.
