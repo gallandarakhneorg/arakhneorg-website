@@ -1,6 +1,6 @@
 _model: redirect
 ---
-target: /java/maven3
+target: /othertools/maven3
 ---
 _discoverable: no
 

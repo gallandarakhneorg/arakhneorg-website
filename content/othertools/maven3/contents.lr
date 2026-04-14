@@ -1,0 +1,43 @@
+title: Maven 3 for Ubuntu
+---
+subtitle: Ubuntu package of Maven 3
+---
+version: 3.9.14
+---
+pub_date: 2026-04-03
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+license: Apache License 2
+---
+license_info: https://opensource.org/licenses/Apache-2.0
+---
+ubuntu: ../../linux/ubuntu
+---
+body:
+
+### 1. What is maven?
+
+[Apache Maven](http://maven.apache.org/) is a software project management and comprehension tool. Based on the concept of a project object 
+model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
+
+Maven's primary goal is to allow a developer to comprehend the complete state of a development effort in the shortest period of time. 
+In order to attain this goal there are several areas of concern that Maven attempts to deal with:
+
+* Making the build process easy
+* Providing a uniform build system
+* Providing quality project information
+* Providing guidelines for best practices development
+* Allowing transparent migration to new features
+
+[More details](http://maven.apache.org/what-is-maven.html)
+
+### 2. Ubuntu Package for Maven 3
+
+**This page provides only a Debian/Ubuntu package of Maven 3.**
+For installing this package, please use the [Ubuntu package repository of {{ config.PROJECT.name }}](../../linux/ubuntu).
+The package differs from those provided by Ubuntu on:
+
+* A single package is provided with all Maven inside, and
+* The installed Maven does not depend on additional libraries that are installed on the Ubuntu system, as it is done by the Ubuntu's version of this package.
+
