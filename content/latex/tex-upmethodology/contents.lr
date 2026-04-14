@@ -83,52 +83,143 @@ The style has many predefined colors. You could adapt them to your own style by 
 \definecolor{mycolor}{rgb}{0.62890625,0.0546875,0.18359375}
 ```
 
-The major colors that could be redefined are:
-* `algorithmboder`: the color of the borders of the algorithms;
-* `algorithmcaption`: the color of the text for the descriptions of the algorithms;
-* `algorithmcaptionlabel`: the color of the text that is displayed for the labels of the algorithms, e.g., `Algorithm 1`;
-* `backpagetext`: the color of the text that is displayed on the back page;
-* `backpagetitle`: the color of the titles that are displayed on the back page;
-* `bibemphemphtextcolor`: the color of the text that is emphazing in the bibliogaphy, usually the titles;
-* `chaptertitlecolor`: the color of the text of a chapter's title;
-* `chaptertitlenumcolor`: the color of the chapter's number in the chapter's title;
-* `contributionbackground`: the background color of the boxes `\begin{contribution}\end{contribution}`;
-* `contributiontitle`: the text color of the boxes `\begin{contribution}\end{contribution}`;
-* `definitionbackground`: the background color of the `definition` environment;
-* `definitionborder`: the color of the border lines and the title's background of the `definition` environment;
-* `definitionheaderforeground`: the color of the title for the title of the `definition` environment;
-* `definitiontextforeground`: the color of the text in the `definition` environment;
-* `emphboxbackground`: the background color of the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`;
-* `emphboxbackgroundb`: the background color of the secondary emphazing boxes, e.g., `\begin{emphbox2}\end{emphbox2}`;
-* `emphboxbackgroundc`: the background color of the third-level emphazing boxes, e.g., `\begin{emphbox3}\end{emphbox3}`;
-* `emphboxborder`: the color of the borders of the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`;
-* `emphboxtext`: the text color in the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`;
-* `emphemphtextcolor`: the color of the text that is marked with very emphazing, i.e., with `\Emph{}`;
-* `emphtextcolor`: the color of the text that is marked with emphazing, i.e., with `\emph{}`;
-* `floatexplanationforeground`: the color of the explanation's text for floats (figures and tables);
-* `floatsourceforeground`: the color of the source's text for floats (figures and tables);
-* `frontpagetitle`: the color of the title on the front page;
-* `frontpageauthors`: the standard of the author's name on the front page;
-* `objectivebackground`: the background color of the boxes `\begin{objective}\end{objective}`;
-* `objectivetitle`: the text color of the boxes `\begin{objective}\end{objective}`;
-* `paragraphtitlecolor`: the color of the text of a paragraph's title;
-* `parttitlecolor`: the color of the text of a part's title;
-* `researchquestionbackground`: the background color of the boxes `\begin{researchquestion}\end{researchquestion}`;
-* `researchquestiontitle`: the text color of the boxes `\begin{researchquestion}\end{researchquestion}`;
-* `sectiontitleboxcolor`: the background color of the box in which the section's number are written in the section's title;
-* `sectiontitlecolor`: the color of the text of a section's title;
-* `sectiontitlenumcolor`: the color of the section's number in the section's title;
-* `standardphdcolor`: the major color that is associated to the style. This color is usually used as the base for many of the other colors;
-* `subparagraphtitlecolor`: the color of the text of a subparagraph's title;
-* `subsectiontitlecolor`: the color of the text of a sub-section's title;
-* `subsectiontitlenumcolor`: the color of the sub-section's number in the sub-section's title;
-* `subsubsectiontitlecolor`: the color of the text of a sub-sub-section's title;
-* `tablebackground`: the background color of the cells in a table or a tabular that are not header cells;
-* `tableforeground`: the text color in the cells in a table or a tabular that are not header cells;
-* `tableheaderbackground`: the background color of headers and titles in a table or a tabular;
-* `tableheaderforeground`: the text color in headers and titles in a table or a tabular;
-* `tablerule`: the color of the rules of table or a tabular;
-* `watermarkcolor`: the color of the watermark text.
+The major colors that could be redefined are listed in the following tables.
+
+##### Algorithms
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `algorithmboder`             | borders of the algorithms                                                                   |
+| `algorithmcaption`           | text for the descriptions of the algorithms                                                 |
+| `algorithmcaptionlabel`      | text that is displayed for the labels of the algorithms, e.g., `Algorithm 1`                |
+
+
+##### Back-Cover Page
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `backpagetext`               | text that is displayed on the back page                                                     |
+| `backpagetitle`              | titles that are displayed on the back page                                                  |
+
+
+##### Bibliography
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `bibemphemphtextcolor`       | text that is emphazing in the bibliogaphy, usually the titles                               |
+
+
+##### Contribution Blocks
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `contributionbackground`     | background color of the boxes `\begin{contribution}\end{contribution}`                      |
+| `contributiontitle`          | text color of the boxes `\begin{contribution}\end{contribution}`                            |
+
+
+##### Definition Blocks
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `definitionbackground`       | background color of the `definition` environment                                            |
+| `definitionborder`           | border lines and the title's background of the `definition` environment                     |
+| `definitionheaderforeground` | title for the title of the `definition` environment                                         |
+| `definitiontextforeground`   | text in the `definition` environment                                                        |
+
+
+##### Emphazing Blocks
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `emphboxbackground`          | background color of the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`               |
+| `emphboxbackgroundb`         | background color of the secondary emphazing boxes, e.g., `\begin{emphbox2}\end{emphbox2}`   |
+| `emphboxbackgroundc`         | background color of the third-level emphazing boxes, e.g., `\begin{emphbox3}\end{emphbox3}` |
+| `emphboxborder`              | borders of the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`                        |
+| `emphboxtext`                | text in the emphazing boxes, e.g., `\begin{emphbox}\end{emphbox}`                           |
+| `emphemphtextcolor`          | text that is marked with very emphazing, i.e., with `\Emph{}`                               |
+
+
+##### Emphazing Text
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `emphtextcolor`              | text that is marked with emphazing, i.e., with `\emph{}`                                    |
+
+
+##### Floating Objects
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `floatexplanationforeground` | explanation's text for floats (figures and tables)                                          |
+| `floatsourceforeground`      | source's text for floats (figures and tables)                                               |
+
+
+##### Front-Cover Page
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `frontpagetitle`             | title on the front page                                                                     |
+| `frontpageauthors`           | author's name on the front page                                                             |
+
+
+##### Objective Blocks
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `objectivebackground`        | background color of the boxes `\begin{objective}\end{objective}`                            |
+| `objectivetitle`             | text in the boxes `\begin{objective}\end{objective}`                                        |
+
+
+##### Research Question Blocks
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `researchquestionbackground` | background color of the boxes `\begin{researchquestion}\end{researchquestion}`              |
+| `researchquestiontitle`      | text in the boxes `\begin{researchquestion}\end{researchquestion}`                          |
+
+
+##### PhD Disseration Standards
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `standardphdcolor`           | the major color that is associated to the style. This color is usually used as the base for many of the other colors |
+
+
+##### Sectioning
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `chaptertitlecolor`          | text of a chapter's title                                                                   |
+| `chaptertitlenumcolor`       | chapter's number in the chapter's title                                                     |
+| `paragraphtitlecolor`        | text of a paragraph's title                                                                 |
+| `parttitlecolor`             | text of a part's title                                                                      |
+| `sectiontitleboxcolor`       | background color of the box for the section's number in the section's title                 |
+| `sectiontitlecolor`          | text of a section's title                                                                   |
+| `sectiontitlenumcolor`       | section's number in the section's title                                                     |
+| `subparagraphtitlecolor`     | text of a subparagraph's title                                                              |
+| `subsectiontitlecolor`       | text of a sub-section's title                                                               |
+| `subsectiontitlenumcolor`    | sub-section's number in the sub-section's title                                             |
+| `subsubsectiontitlecolor`    | text of a sub-sub-section's title                                                           |
+
+
+##### Tables and Tabulars
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `tablebackground`            | background color of the cells in a table or a tabular that are not header cells             |
+| `tableforeground`            | text in the cells in a table or a tabular that are not header cells                         |
+| `tableheaderbackground`      | background color of headers and titles in a table or a tabular                              |
+| `tableheaderforeground`      | text in headers and titles in a table or a tabular                                          |
+| `tablerule`                  | rules of table or a tabular                                                                 |
+
+
+##### Watermark
+
+
+| Color code                   | Description of uses                                                                         |
+|------------------------------|---------------------------------------------------------------------------------------------|
+| `watermarkcolor`             | watermark text                                                                              |
+
 
 #### 2.4. Define the layout of the front page
 
