@@ -18,6 +18,8 @@ ubuntu: ../../linux/ubuntu
 ---
 ctan_package: upmethodology
 ---
+documentation: Complete Documentation:./upmethodology-doc.pdf
+---
 license: LGPL3
 ---
 license_info: https://opensource.org/licenses/lgpl-3-0

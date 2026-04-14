@@ -14,7 +14,7 @@ github: https://github.com/gallandarakhneorg/tinymas/
 ---
 github_name: tinymas
 ---
-documentation: ./apidocs/index.html
+api_documentation: ./apidocs/index.html
 ---
 license: LGPL 2.1
 ---

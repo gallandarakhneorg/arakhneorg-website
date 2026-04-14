@@ -16,16 +16,16 @@
   {% if not from_index %}
     <p>
     {% if post.pub_date %}
-      <img alt="Publication: {{ postpub_date }}" src="https://img.shields.io/badge/published-{{ post.pub_date|replace("-","/") }}-yellowgreen.svg?style=flat-square"></a>
+      <img alt="Publication: {{ postpub_date }}" src="https://img.shields.io/badge/published-{{ post.pub_date|replace("-","/") }}-yellowgreen.svg?style=flat-square" title="Publication Date"></a>
     {% endif %}
     {% if post.maven_groupid and post.maven_artifactid %}
-      <a href="https://central.sonatype.com/search?q={{ post.maven_groupid }}"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/{{ post.maven_groupid }}/{{ post.maven_artifactid }}.svg?label=Maven%20Central"></a>
+      <a href="https://central.sonatype.com/search?q={{ post.maven_groupid }}"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/{{ post.maven_groupid }}/{{ post.maven_artifactid }}.svg?label=Maven%20Central" title="Package on Maven Central"></a>
     {% endif %}
     {% if post.license and post.github_name %}
       {% if post.license_info %}
-        <a href="{{ post.license_info }}"><img alt="{{ post.license }}" src="https://img.shields.io/github/license/gallandarakhneorg/{{ post.github_name }}.svg?style=flat-square"></a>      
+        <a href="{{ post.license_info }}"><img alt="{{ post.license }}" src="https://img.shields.io/github/license/gallandarakhneorg/{{ post.github_name }}.svg?style=flat-square" title="License"></a>      
       {% else %}
-        <img alt="{{ post.license }}" src="https://img.shields.io/github/license/gallandarakhneorg/{{ post.github_name }}.svg?style=flat-square">
+        <img alt="{{ post.license }}" src="https://img.shields.io/github/license/gallandarakhneorg/{{ post.github_name }}.svg?style=flat-square" title="License">
       {% endif %}
     {% endif %}
     </p>
@@ -36,7 +36,7 @@
         {% set components = req.split(':') %}
         {% set label = components[0] %}
         {% set url = ':'.join(components[1:]) %}
-        <a href="{{ url }}"><img alt="Require {{ label }}" src="https://img.shields.io/badge/requires-{{ label}}-red.svg?style=flat-square"></a>
+        <a href="{{ url }}"><img alt="Require {{ label }}" src="https://img.shields.io/badge/requires-{{ label}}-red.svg?style=flat-square" title="Requirement"></a>
       {% endfor %}
     {% endif %}
     {% if post.compliances %}
@@ -45,13 +45,13 @@
         {% set components = comp.split(':') %}
         {% set label = components[0] %}
         {% set url = ':'.join(components[1:]) %}
-        <a href="{{ url }}"><img alt="Require {{ label }}" src="https://img.shields.io/badge/compliant-{{ label}}-green.svg?style=flat-square"></a>
+        <a href="{{ url }}"><img alt="Compliant with {{ label }}" src="https://img.shields.io/badge/compliant-{{ label}}-green.svg?style=flat-square" title="Compliant with"></a>
       {% endfor %}
     {% endif %}
     </p>
-    {% if post.documentation %}
+    {% if post.api_documentation %}
     <p>
-      <a href="{{ post.documentation }}"><img alt="Documentation" src="https://img.shields.io/badge/documentation-API-blue.svg?style=flat-square"></a>
+      <a href="{{ post.api_documentation }}"><img alt="API Documentation" src="https://img.shields.io/badge/documentation-API-blue.svg?style=flat-square" title="API Documentation"></a>
     </p>
     {% endif %}
     {% if post.github or post.ubuntu or post.ctan_package %}
@@ -59,17 +59,33 @@
       {% if post.github %}
         <li class="list-inline-item">
           <a href="{{ post.github }}" target="_blank">
-            <span class="fa-stack fa-lg">
+            <span class="fa-stack fa-lg" title="GitHub">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-github fa-stack-1x fa-inverse"></i>
             </span>
           </a>
         </li>
       {% endif %}
+      {% if post.documentation %}
+	      {% set documentation_list = post.documentation.split(',') %}
+	      {% for comp in documentation_list %}
+		{% set components = comp.split(':') %}
+		{% set label = components[0] %}
+		{% set url = ':'.join(components[1:]) %}
+        <li class="list-inline-item">
+          <a href="{{ url }}" target="_blank">
+            <span class="fa-stack fa-lg" title="{{ label }}">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        </li>
+	      {% endfor %}
+      {% endif %}
       {% if post.ubuntu %}
         <li class="list-inline-item">
           <a href="{{ post.ubuntu }}" target="_blank">
-            <span class="fa-stack fa-lg">
+            <span class="fa-stack fa-lg" title="On Ubuntu Linux">
               <i class="fa fa-circle fa-stack-2x"></i>
               <i class="fa fa-linux fa-stack-1x fa-inverse"></i>
             </span>
@@ -79,7 +95,7 @@
       {% if post.ctan_package %}
         <li class="list-inline-item">
           <a href="http://www.ctan.org/pkg/{{ post.ctan_package }}" target="_blank">
-            <img src="../../img/available_on_ctan.png" alt="Available on CTAN">
+            <img src="../../img/available_on_ctan.png" alt="Available on CTAN" title="Available on CTAN">
           </a>
         </li>
       {% endif %}

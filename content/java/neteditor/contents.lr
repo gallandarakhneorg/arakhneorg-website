@@ -18,7 +18,7 @@ license: LGPL3
 ---
 license_info: https://opensource.org/license/lgpl-3-0
 ---
-documentation: ./apidocs/index.html
+api_documentation: ./apidocs/index.html
 ---
 requires: Java 11:https://www.java.com
 ---

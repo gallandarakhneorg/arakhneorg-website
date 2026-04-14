@@ -14,6 +14,8 @@ github: https://github.com/gallandarakhneorg/tex-templates/
 ---
 github_name: tex-templates
 ---
+documentation: Documentation for CIAD Slides:/download/latex/slides - beamer/documentation.pdf
+---
 ubuntu: ../../linux/ubuntu
 ---
 license: LGPL3
@@ -31,7 +33,7 @@ TeX-templates provides styles for creating slides with the Beamer tool.
 
 | Description | Info | Examples | Ubuntu |
 |-------------|------|----------|--------|
-| [CIAD Laboratory](https://ciad-lab.fr) located at the [Université de Technologie de BelfortMontbéliard](http://www.utbm.fr) and the [Université Bourgogne Europe](http://www.ube.fr) |  Documentation and example are included: [download](../../download/latex/slides - beamer/ciadslides.tar.gz) | ![front](./ciadslides_front.jpg) ![page](./ciadslides_page.jpg) | `tex-templates-ciad-beamer` |
+| [CIAD Laboratory](https://ciad-lab.fr) located at the [Université de Technologie de BelfortMontbéliard](http://www.utbm.fr) and the [Université Bourgogne Europe](http://www.ube.fr) |  Documentation and example are included: [download](../../download/latex/slides - beamer/ciadslides.tar.gz) | ![front 1](./ciadslides_front.jpg) ![front 2](./ciadslides_phd_front.jpg) ![front 3](./ciadslides_conf_front.jpg) ![page](./ciadslides_page.jpg) | `tex-templates-ciad-beamer` |
 
 
 ### 2. PhD Dissertations
