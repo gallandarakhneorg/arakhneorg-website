@@ -1,0 +1,176 @@
+title: Live Oral Translator on top of pdfpc
+---
+subtitle: Presenter console with oral live translation
+---
+version: 1.1
+---
+pub_date: 2026-04-05
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+license: Apache License 2
+---
+license_info: https://opensource.org/licenses/Apache-2.0
+---
+github: https://github.com/gallandarakhneorg/pdfpc-live-translator
+---
+body:
+
+### 1. What is pdfpc?
+
+[**pdfpc**](https://pdfpc.github.io/) (PDF Presenter Console) is a cross-platform presentation tool designed for speakers who need a professional edge. It leverages a multi-monitor setup to give you a private, real-time dashboard of slide previews, speaker notes, and a timer—all while your audience sees only the current slide.
+
+* **Dual‑screen presenter console**: Your audience sees the current slide on the main screen; you see a comprehensive overview on your laptop, including an image of the next slide and the remaining presentation time.
+* **Integrated timer & notes**: Display the current time, a countdown timer, and your speaking notes (plain or Markdown) to help you stay on track.
+* **Works with any PDF**: Accepts PDFs created by nearly any presentation software (LaTeX/Beamer, PowerPoint, LibreOffice, etc.).
+* **Open source & cross‑platform**: Available for GNU/Linux, macOS (via Homebrew or MacPorts), and Windows through WSL.
+
+### 2. What is Pdfpc-live-translator?
+
+**pdfpc-live-translator** is a companion tool for the [pdfpc](https://pdfpc.github.io/) presentation software. It captures the presenter's voice in real time, performs speech‑to‑text recognition, displays the spoken text as a subtitle on the screen, and optionally translates the caption live into another language. The translated text appears as an overlay on the audience‑facing pdfpc window, making presentations accessible to multilingual audiences without requiring manual slide notes.
+
+The default translation direction is *English to Simplified Chinese*, but the source and target languages can be reconfigured.
+
+#### Major Features
+
+##### 🎤 Live Voice Capture & Speech‑to‑Text
+
+* Uses the system microphone to capture the presenter's voice.
+* Runs a **local speech recognition engine** to convert speech into text.
+* Displays the recognized text (the subtitle) at the bottom of the presentation overlay.
+
+##### 🌐 Real‑time Translation
+
+* Automatically translates the recognized text from a source language to a target language.
+* **Default configuration:** English to Chinese (Simplified).
+* Translations appear immediately below (or alongside) the original caption.
+* Supports swapping source/target languages and adding other language pairs via configuration.
+
+##### 🖥️ pdfpc Overlay Integration
+
+* Renders the captions and translations as a transparent overlay on top of the pdfpc presentation window (audience screen).
+* Does not interfere with pdfpc's own presenter console or slide controls.
+* Overlay position, font size, and background transparency are adjustable.
+
+##### ⌨️ Offline Mode
+
+Uses on‑device speech recognition and machine translation models: no internet required.
+
+##### 🎛️ Simple Command‑Line Interface
+
+Start the translator with default settings:
+
+```bash
+$> python3 start_talk_translate.py my-slides.pdf
+```
+
+### 3. Installation of the translation script
+
+The following elements must be installed to have the live translation working.
+
+#### 3.1. System-wide installation
+
+You must install Python and its virtual environment.
+
+```bash
+$> sudo apt install python3-full
+$> sudo apt install python3-venv
+```
+
+
+#### 3.2. Create Python virtual environment
+
+Create the Python virtual environment to install the live translation libraries.
+
+```bash
+$> mkdir ~/bin/python3_environments
+$> cd ~/bin/python3_environments
+$> python3 -m venv live_translator
+```
+
+
+#### 3.3. Install local libraries
+
+Install the libraries in the virtual environment
+
+```bash
+$> ~/bin/python3_environments/live_translator/bin/pip install tk
+$> ~/bin/python3_environments/live_translator/bin/pip install pydub
+$> ~/bin/python3_environments/live_translator/bin/pip install screeninfo
+$> ~/bin/python3_environments/live_translator/bin/pip install whisper
+$> ~/bin/python3_environments/live_translator/bin/pip install faster-whisper
+```
+
+
+#### 3.4. Install VOSK
+
+VOSK is used for capturing the sound wave from the microphone ad converting offline it to text.
+
+```bash
+$> ~/bin/python3_environments/live_translator/bin/pip install vosk
+```
+
+* Download the English model from [VOSK models](https://alphacephei.com/vosk/models) and extract it.
+* Update the launching script with the full path to the downloaded library.
+
+
+#### 3.5. Install PyAudio
+
+PyAudio is used for reading the microphone.
+
+```bash
+$> sudo apt install portaudio19-dev
+$> ~/bin/python3_environments/live_translator/bin/pip install pyaudio
+```
+
+
+#### 3.6. Install ARGOS
+
+ARGOS is used for translating offline the text from a source language to a target language.
+
+```bash
+$> ~/bin/python3_environments/live_translator/bin/pip install argostranslate
+```
+
+
+#### 3.7. Install the English-Chinese package:
+
+Below, you could specify the translation dictionary to be installed.
+
+```bash
+$> ~/bin/python3_environments/live_translator/bin/argospm install translate-en_zh
+```
+
+### 4. Run pdfpc-live-translator
+
+#### 4.1. Synopsis
+
+```bash
+start_talk_translate [options] <pdf-file>
+```
+
+#### 4.2. Options
+
+**pdfpctool** accepts the following options from the command line:
+
+| Options                 | Description                                        |
+|-------------------------|----------------------------------------------------|
+| `-h`, `--help`          | show this help message and exit                    |
+| `--input INPUT          | index (numeric) of the input sound device. See `--inputs` for the complete list |
+| `--inputs`              | show the list of all the available sound input devices |
+| `--langmodel LANGMODEL  | path to the VOSK language model                    |
+| `--notranslate`         | disable live translation, same as running disrectly `pdfpc` |
+| `--partial`             | enable partial voice recognition by showing the translation of a text before the end of the sentence is detected |
+| `--pythonenv PYTHONENV  | path to Python virtual environment                 |
+| `--quiet                | disable live output on the console                 |
+| --screens               | show the list of all the available screens         |
+| `--screen SCREEN`       | numeric index of the screen to be used. See `--screens` for the list |
+| `--single`, `-S`        | force to use only one screen                       |
+| `--swap`, `-s`          | swap the presentation/presenter screens            |
+| `--delay DELAY`         | delay in seconds between pdfpc launch and the overlay launch (default: 2s) |
+| `--page PAGE`, `-P PAGE` | start the talk at the given page number (default: 1) |
+| `--inputbuffersize INPUTBUFFERSIZE` | change the size in bytes of the audio input buffer |
+| `--soundrate SOUNDRATE` | sound rate in Hz                                   |
+| `--bothlangs            | show the source and target messages                |
+
+
