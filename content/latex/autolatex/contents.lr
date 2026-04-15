@@ -81,7 +81,7 @@ Enables or disables the bibliography tool (BibTeX, Biber, etc.) if not explicitl
 ###### `--continuous [sleep_duration]`
 ###### `--nocontinous`
 
-Runs AutoLaTeX continuously, repeatedly performing the specified actions. This option causes AutoLaTeX to loop infinitely, similar to the following script (in bash):
+Runs AutoLaTeX continuously, repeatedly performing the specified actions. This option causes AutoLaTeX to loop infinitely, similar to the following script (in bash syntax):
 
 ```bash
 while 1 do
@@ -90,7 +90,7 @@ while 1 do
 done
 ```
 
-The `sleep_duration` parameter specifies the waiting time between loops. If not provided, it defaults to 0. The `--continuous` option forces `--asyncview` to be enabled. With a compatible viewer, the display will update automatically. Some UNIX/Linux versions of `gv -watch` support this for PostScript files, which can be configured via a variable. Many other previewers require manual updates. Note: Adobe Acrobat Reader on MS-Windows locks the PDF file, preventing updates, so it is not recommended for continuous mode.
+The `sleep_duration` parameter specifies the waiting time in seconds between loops. If not provided, it defaults to 0. The `--continuous` option forces `--asyncview` to be enabled. With a compatible viewer, the display will update automatically. Some UNIX/Linux versions of `gv -watch` support this for PostScript files, which can be configured via a variable. Many other previewers require manual updates. Note: Adobe Acrobat Reader on MS-Windows locks the PDF file, preventing updates, so it is not recommended for continuous mode.
 
 ###### `--debug`
 
@@ -291,7 +291,7 @@ Same as `clean`, but also removes Emacs `~` files, other backup files, generated
 
 #### `createbeamer`
 
-Creates a LaTeX package file in the document directory that equips LaTeX Beamer text processor with the control sequences dedicated to AutoLaTeX (slides with animated figures). The package file is named `autolatex-beamer.sty`. See the command `createist` for creating a package dedicated to regular LaTeX document. Specific options are:
+Creates a LaTeX package file in the document directory that equips LaTeX Beamer text processor with the control sequences dedicated to AutoLaTeX (slides with animated figures). The package file is named `autolatex-beamer.sty`. See the command `createsty` for creating a package dedicated to regular LaTeX document. Specific options are:
 
 ###### `--force`
 
