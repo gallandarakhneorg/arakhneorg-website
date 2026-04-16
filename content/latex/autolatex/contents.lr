@@ -14,6 +14,8 @@ github: https://github.com/gallandarakhneorg/autolatex2/
 ---
 github_name: autolatex
 ---
+documentation: Official Documentation:./autolatex.pdf
+---
 ubuntu: ../../linux/ubuntu
 ---
 ctan_package: autolatex
