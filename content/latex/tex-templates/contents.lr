@@ -93,9 +93,9 @@ The names of the Ubuntu packages that could be installed are given in the tables
 3. Copy the content of the archive inside one of your `texmf` directory, usually `/usr/share/texmf/tex/latex/tex-templates` or `$HOME/.texmf` on Unix operating systems.
 4. Update the LaTeX databases from the command line:
 
-```bash
-sudo mktexlsr
-sudo update-updmap --quiet
-```
+   ```bash
+   sudo mktexlsr
+   sudo update-updmap --quiet
+   ```
 
 
