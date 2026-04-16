@@ -1,0 +1,18 @@
+title: TeX-templates 20260416
+---
+pub_date: 2026-04-16
+---
+page: /latex/tex-templates
+---
+description:
+
+### CIAD Beamer Template
+
+The CIAD Beamer templates now propose three types of front page:
+
+1. The regular CIAD front page, usually used for "business" talks.
+2. A front page that is deficated to PhD or Master oral defenses, with the title, the author, and members of the evaluation committee.
+3. A front page for conference presentations, with the usual authors, affilitations, conference name, date and place.
+
+
+The official documentation and the tutorial have been updated.
