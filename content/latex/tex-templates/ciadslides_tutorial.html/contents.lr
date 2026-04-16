@@ -1,0 +1,820 @@
+title: Tutorial: create slides with the CIAD template
+---
+languages: LaTeX
+---
+pub_date: 2026-04-16
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+body:
+
+This tutorial will walk you through the entire process of preparing a short but professional **introduction to multiagent systems** using the [**CIAD Beamer template**](/latex/tex-templates). The CIAD template is a collection of LaTeX styles designed specifically for the [CIAD laboratory](https://www.ciad-lab.fr) ([Université de Technologie Belfort Montbéliard](https://www.utbm.fr) and [Université Bourgogne Europe](https://www.ube.fr)) and is ideal for academic and business presentations.
+
+I will explain every configuration choice, show you how to structure your slides, and provide ready‑to‑use code examples. At the end of the tutorial you will have a 5‑slide presentation that you can easily extend for longer talks.
+
+### 1. What You Need Before Starting
+
+To follow this tutorial, you must have a working LaTeX environment. The CIAD template works with **pdfLaTeX**, and may also supports **XeLaTeX** if you need advanced fonts.
+
+#### Required software
+
+| Tool | Purpose |
+|------|---------|
+| **LaTeX distribution** (TeX Live, MiKTeX, etc.) | Compile the document |
+| [**AutoLaTeX**](/latex/autolatex/) (optional but recommended) | Automates the compilation process (multiple passes, bibliography, etc.) |
+| **A text editor** (TeXstudio, VS Code, Sublime Text, etc.) | Write the `.tex` source |
+
+> **Note:** AutoLaTeX is a tool developed by me also. It handles all the necessary compilation steps automatically. You can install it from [http://www.arakhne.org/latex/autolatex](/latex/autolatex). However, a standard `pdflatex` chain works equally well.
+
+### 2. Obtaining and Installing the CIAD Beamer Template
+
+The CIAD Beamer template is part of the [**TeX‑templates**](/latex/tex-templates/) collection. You can download it directly from the official page:
+
+1. Go to [https://www.arakhne.org/latex/tex-templates/](/latex/tex-templates/).
+2. Under the **Slides** section, locate the line for the **CIAD Laboratory**.
+3. Click the **download** link to obtain the archive `ciadslides.tar.gz`.
+4. Unpack the archive inside the folder where you will write your presentation. The archive contains:
+   - The main class file `ciadbeamer.cls`.
+   - Several `.sty` (style) files.
+   - A bibliograpgy style `.bst` files.
+   - Examples files and documentation.
+
+**Alternative installation:** If you use Ubuntu, you can install the official Ubuntu package `tex-templates-ciad-beamer` from the [Arakhnê repository](/linux/ubuntu/). This is the cleanest method because the template will be available system‑wide.
+
+Once the files are in place, LaTeX will automatically find them as long as they are in the same directory as your main `.tex` file or in a standard `texmf` tree.
+
+### 3. Understanding the Main Document Class and Its Options
+
+The CIAD template is built on top of the standard `beamer` class. It adds a professional layout, custom colour schemes, logos, and many convenient macros. The main file must begin with:
+
+```latex
+\documentclass[options]{ciadbeamer}
+```
+
+The available options are documented in the template's manual (included in the download, or accsessible [here](/download/latex/slides - beamer/documentation.pdf)). Based on the `TALK.tex` file found in the [MAS‑lesson repository](https://github.com/gallandarakhneorg/mas-lesson), here are the most important options:
+
+| Option | Meaning |
+|--------|---------|
+| `english` (or `french`) | Language of the presentation. |
+| `partsectioncirclenumberstyle` | Uses a circle with the section number as the navigation bullet. Alternative: `sectioncirclenumberstyle`. |
+| `nocarnotlogo` | Removes the Carnot logo (if you are not affiliated with Carnot). |
+| `noubelogo` (or `noutbmlogo`) | Removes the logo of the University Bourgogne Europe (UBE) or UTBM, depending on the affiliation you want to show up on your slides. |
+
+**Example of a typical declaration:**
+
+```latex
+\documentclass[english,partsectioncirclenumberstyle,nocarnotlogo,noubelogo]{ciadbeamer}
+```
+
+> **Why these choices?**
+> - `english` ensures all automatically generated text (e.g., “Table of contents”, “Figure”, “Bibliography”) appears in English.
+> - `partsectioncirclenumberstyle` gives a clean, modern talk progression indicator at the bottom right corner of the slides. 
+> - Removing logos (`nocarnotlogo`, `noubelogo`) is appropriate if you are not a member of those institutions. You can later add your own logos using the `\partnerlogo` command (explained below).
+
+**By default, the CIAD template uses the regular "business" style. To switch to PhD oral defense or conference presentation modes, please read the following sections.**
+
+### 4. Structuring Your Presentation – The Global Layout
+
+A typical CIAD Beamer presentation is split into several files for clarity and reusability. For a short 5‑slide talk you can keep everything in a single `.tex` file, but the template encourages a modular structure:
+
+- **Main file** (e.g., `presentation.tex`): Contains the `\documentclass` and includes the other parts.
+- **Preamble file** (e.g., `preamble.tex`): Holds all the configuration (title, author, logos, paths).
+- **Chapters** (e.g., `chapters/intro.tex`, `chapters/mas.tex`): Each chapter is a set of slides (frames) that can be reused across different talks.
+
+For a 5‑slide introduction, we can keep all slides in the main file, but I will still show you the recommended structure because it is extremely useful when your presentation grows.
+
+### 5. Configuring the Preamble – Title, Authors, Logos, and Graphics
+
+The preamble is where you define the **metadata** of your talk (title, event, authors) and set up **graphics** (background images, logos). Below is a complete preamble that follows the style used in the [MAS‑lesson repository](https://github.com/gallandarakhneorg/mas-lesson/blob/master/talks/utseus/preamble.tex).
+
+```latex
+% --- Authors (multiple authors possible) ---
+\addauthor*[Y.~Student]{Your~Name}
+\addauthor[S.~Galland]{Stéphane~Galland}   % optional, e.g., your supervisor
+```
+
+The commands `\addauthor*[short]{Full Name}` and `\addauthor[short]{Full Name}` add an author. The optional `[short]` is used in footnotes and place where the sohrt name is needed.
+The stared-version of this command marks the author as the one who will give the talk (usually his/her name is underlined in the list of the authors).
+
+
+```latex
+% --- Event where the talk is given ---
+\event[Your Course Name – Year]{Full Title of the Event / Course}
+```
+
+The command `\event[short]{Full event name}` defines the event; the short form appears in the footer or any place where the short text is needed.
+
+
+```latex
+% --- Title of the presentation ---
+\title{Introduction to Multiagent Systems}
+
+% --- Optional: predefined background for the title page ---
+% \setpredefinedtitlepagebackground7   % use the 7th built‑in style
+```
+
+With the command `\setpredefinedtitlepagebackground<NUMBER>`, you could change the look of the title page. The template offers several built‑in background styles. You can also set a custom image. See the documentation for details.
+
+
+```latex
+% --- Graphics path: where to find images ---
+\begin{graphicspathcontext}{ {./imgs/},{./imgs/auto/},\old }
+
+    % --- Title page background image ---
+    \resolvepicturename{custom_background}   % image file name (without extension)
+    \pgfdeclareimage[height=\paperheight]{custom-background}{\resolvedfilename}
+    \settitlepageuserbackground{custom-background}
+
+    % --- Left logo on title page ---
+    \resolvepicturename{my_left_logo}
+    \pgfdeclareimage[width=5cm]{leftlogo}{\resolvedfilename}
+    \settitlepageleftfigure(0,-30){leftlogo}
+
+    % --- Right logo on title page ---
+    \resolvepicturename{my_right_logo}
+    \pgfdeclareimage[width=6cm]{rightlogo}{\resolvedfilename}
+    \settitlepagerightfigure(230,-70){rightlogo}
+
+    % --- Partner logos (appear on all slides, usually in the footer) ---
+    \partnerlogo{my_university_logo_gray}
+    \partnerlogo{my_lab_logo_gray}
+
+\end{graphicspathcontext}
+```
+
+The block environment `\begin{graphicspathcontext}...\end{graphicspathcontext}` enables to specify where to find the images in multiple folders. The argument of the environment is a list of path (I recommend to enclose each path with curly braces). The `\old` placeholder refers to the previously defined graphics path. All the commands searching for images that are used inside this block environment will automatically use the provided list of folders, in the given order.
+
+> *** VERY IMPORTANT NOTE: ***
+> Each path name must be terminated by a folder separator character, i.e., `/` on Linux or Mac operating systems, or `\` on Windows operating systems.
+
+For helping you to find the images automatically, the two following commands are provided. The command `\resolvepicturename{filename}` finds the image file (supports `.pdf`, `.png`, `.jpg`, and possibly other file extensions) without needing the extension. The result of this search is stored in the command `\resolvedfilename`.
+
+The command `\pgfdeclareimage[width=...]{id}{file}` defines a reusable image object in the PDF. In other words, it loads the given image with the given options, and the image is loaded in the document once and reused multiple times the loaded data, while the standard command `\includegraphics[options]{file}` is loaded the image data in the PDF each time.
+
+The command `\settitlepageuserbackground{file-id}` places the image as the background for the left part of the title slide. The argument is always the identifier of an image that was loaded with `\pgfdeclareimage`.
+
+The command `\settitlepageleftfigure(x,y){file-id}` positions a logo or an image on the left side of the title page. The `x` and `y` values permit to adjust the position of the image. The argument `file-id` is always the identifier of an image that was loaded with `\pgfdeclareimage`.
+
+The command `\settitlepagerightfigure(x,y){file-id}` positions a logo or an image on the right side of the title page. The `x` and `y` values permit to adjust the position of the image. The argument `file-id` is always the identifier of an image that was loaded with `\pgfdeclareimage`.
+
+Each time the command `\partnerlogo{file}`  adds a partner logo to the footer of every slide. The argument `file` is always the filename and not an identifier of an image that was loaded with `\pgfdeclareimage`. I may recommand to use a grayscale version for best results with the rest of the CIAD template style.
+
+> **Tip:** If you do not want to bother with custom title page graphics, simply omit the `\settitlepageuserbackground` and `\settitlepage...figure` commands. The template will then use a standard background.
+
+```latex
+% --- Choose the footer style: show section names ---
+\usefootlinewithsections
+```
+
+The command `\usefootlinewithsections` displays the current sections' names in the footer. You could also specify the the footer should contains the presentation's title by using the command `\usefootlinewithdocumentname`.
+
+Now, you could start the document by itself.
+
+```latex
+\begin{document}
+```
+
+### 6. Adapting the front page to other types of talks
+
+The default front page of the CIAD Beamer template is more dedicated to "business" talks. If you need to prepare a talk for your PhD oral defense or a conference paper's presentation, see below.
+
+#### 6.1. Title page for PhD oral defenses
+
+The CIAD Beamer theme provides a dedicated front page for PhD (or Master) oral defenses. To replace the regular title page with the PhD defense front page, add the `oraldefense` option when loading the document class:
+
+```latex
+\documentclass[oraldefense]{ciadbeamer}
+```
+
+##### Basic Information (Title, Subtitle, Author, Date, Place)
+
+Even with the oral defense page, you still set the main title and subtitle as usual:
+
+```latex
+\title{Your PhD Thesis Title}
+\subtitle{Optional Subtitle}
+\addauthor{John Doe}
+\addauthor*{Jane Smith}
+```
+
+You can also add an affiliation or description for all authors together:
+
+```latex
+\authordescription{CIAD Lab, UTBM, France}
+```
+
+Two specific commands are available for the defense:
+
+```latex
+\date{June 15, 2025}
+\place{Amphitheater A, University of Belfort-Montbéliard}
+```
+
+##### Setting up the defense committee
+
+The committee members are added with the `\addcommittee` command. It takes two mandatory arguments: name and position. Optional flags specify the role and gender.
+
+```latex
+\addcommittee[options]{Name}{Position}
+```
+
+The options are:
+
+| Option        | Meaning                                      |
+|---------------|----------------------------------------------|
+| `male`        | Member is a man (default)                    |
+| `female`      | Member is a woman                            |
+| `president`   | President of the committee                   |
+| `reviewer`    | Reviewer of the work                         |
+| `examiner`    | Standard examiner                            |
+| `director`    | Thesis director                              |
+| `codirector`  | Co-director                                  |
+| `supervisor`  | Supervisor                                   |
+| `invitee`     | Invited member (no specific role)            |
+
+
+For examples:
+
+```latex
+% A male reviewer
+\addcommittee[reviewer]{Alan Turing}{Prof. at University X}
+
+% A female president
+\addcommittee[female, president]{Ada Lovelace}{Prof. at University Y}
+
+% The director (male by default)
+\addcommittee[director]{Charles Babbage}{Prof. at University W}
+```
+
+##### Adding logos
+
+Add one or more logos with:
+
+```latex
+\adddefenselogo{filename}
+```
+
+To remove all added logos and keep only the default CIAD lab logos:
+
+```latex
+\resetdefenselogo
+```
+
+To remove all logos but restore the CIAD laboratory logos:
+
+```latex
+\resetdefenselogotodefault
+```
+
+#### 6.2. Title page for conference presentations
+
+The CIAD Beamer theme also provides a dedicated front page for conference presentations. Add the `conferencepresentation` option when loading the document class:
+
+```latex
+\documentclass[conferencepresentation]{ciadbeamer}
+```
+
+##### Basic Information (Title, Subtitle, Authors)
+
+Use the regular commands:
+
+```latex
+\title{Your Conference Paper Title}
+\subtitle{Optional Subtitle}
+\addauthor{John Doe}
+\addauthor*{Jane Smith}
+```
+
+##### Affiliations
+
+Conference presentations often require author affiliations. The CIAD theme provides specific commands for this:
+
+```latex
+\affiliation{id}{Affiliation name}
+\affil{id}
+```
+
+* `\affiliation` defines an affiliation with a unique identifier (e.g., "1", "utbm").
+* `\affil` displays the affiliation identifier, usually placed next to the author name.
+
+```latex
+\affiliation{1}{CIAD Laboratory, UTBM, France}
+\affiliation{2}{University of Burgundy, France}
+
+\addauthor{John Doe\affil{1}}
+\addauthor{Jane Smith\affil{2}}
+```
+
+To reset all affiliations:
+
+```latex
+\resetaffiliations
+```
+
+##### Date and Place
+
+Two commands are available for conference presentation:
+
+```latex
+\date{September 10--14, 2025}
+\place{Barcelona, Spain}
+```
+
+##### Adding logos
+
+You can add one or more logos at the bottom of the conference title page:
+
+```latex
+\addpresentationlogo{filename}
+```
+
+To remove all added logos:
+
+```latex
+\resetpresentationlogo
+```
+
+To remove all logos but keep the default CIAD laboratory logos:
+
+```latex
+\resetpresentationlogotodefault
+```
+
+
+
+### 7. Slide Commands with CIAD template
+
+The `ciadbeamer` class extends the standard `beamer` functionality with several dedicated commands and environments. This section focuses exclusively on the **advanced slide commands** as documented in the official CIAD template manual.
+
+#### 7.1 Basic Frame Structure
+
+The fundamental unit of any Beamer presentation is the **frame**. The CIAD template supports all standard frame types while adding its own specialized environments.
+
+##### Standard Frame
+
+This is the most used type of frames. It provides a frame with the standard CIAD style, including title and footer.
+
+```latex
+\begin{frame}{Frame Title}
+    Content goes here...
+\end{frame}
+```
+
+##### Frame with Overlay Specifications
+
+It is possible to specify the overlays to be shown. A frame may result in the display of multiple slides in sequence. The overlay specification enables to select those that will be really displayed.
+
+```latex
+\begin{frame}<1-3>{Frame Title}
+    This content appears on slides 1-3 only.
+\end{frame}
+```
+
+##### Plain Frame
+
+The plain frame is a frame with neither headline nor footline.
+
+```latex
+\begin{frame}[plain]
+    Content of the plain frame.
+\end{frame}
+```
+
+#### 7.2 Document Structuring Commands
+
+The CIAD template provides commands for organizing your presentation logically:
+
+| Command | Description |
+|---------|-------------|
+| `\part{Part Title}` | Divides the presentation into major parts |
+| `\section{Section Title}` | Creates a new section (appears in navigation) |
+| `\subsection{Subsection Title}` | Creates a subsection |
+| `\subsubsection{Subsubsection Title}` | Creates a subsubsection |
+
+These commands automatically generate navigation elements in the presentation and table of contents.
+
+##### Table of Contents Generation
+
+The generation of a table of content may be done with the standard Beamer approach:
+
+```latex
+\begin{frame}{Outline}
+    \tableofcontents[hideallsubsections]
+\end{frame}
+```
+
+Options for `\tableofcontents` include (more details in the Beamer official documentation):
+- `hideallsubsections` – shows only sections
+- `showallsubsections` – shows all subsections (default)
+- `currentsection` – highlights current section
+- `currentsubsection` – highlights current subsection
+
+Nevertheless, the CIAD template provides the following command to easily show a table of content:
+
+```latex
+\tableofcontentsslide[toc options][frame options]
+```
+
+`toc options` are the options passed to the internal `\tableofcontents`. And, `frame options` are passed to the frame itself.
+
+
+#### 7.3 Creating special slides with the CIAD Beamer theme
+
+The CIAD Beamer theme provides a rich set of environments and commands to build professional slides with custom layouts. This tutorial explains several special slide types (bold faced in the following table), their syntax, options, and usage examples.
+
+| Slide type                        | Command / Environment                          |
+|-----------------------------------|------------------------------------------------|
+| Part‑only frame                   | `\partframeonly{title}`                        |
+| Title on the right                | `righttitleframe` environment                  |
+| **Text + picture**                | `textpictureframe` environment                 |
+| Lawn on left / right              | `leftlawnframe` / `rightlawnframe`             |
+| Grid of icons                     | `gridframe` environment + `\cell`              |
+| **Full‑page figure**              | `\figureslide`                                 |
+| **Animated figure**               | `\animatedfigureslide`                         |
+| **Embedded video**                | `\embeddedvideoslide`                          |
+| **Text + video + logos**          | `textvideoframe` environment                   |
+| Final slide                       | class options (`thanksslide`, etc.) or `\thanksslide` |
+| Book description                  | `\libraryslide`                                |
+
+
+##### Slide with Text and a Picture (Text on Left, Picture on Right)
+
+**Environment:** `textpictureframe`
+
+The left side contains your text; the right side shows a picture inside a large green area.
+
+####### Step 1: Declare the picture
+
+```latex
+\addtextpicturepicture{pgf-id}{picture-filename}
+\addtextpicturepicture*{pgf-id}{picture-filename}
+```
+
+* No‑star version: the picture width is forced to fit the green area.
+* Star version: the picture height is forced.
+
+####### Step 2: Use the environment
+
+```latex
+\begin{textpictureframe}[options]{main title}{pgf-id}
+  Content of the slide (text on the left)
+\end{textpictureframe}
+```
+
+**Example:**
+
+```latex
+\addtextpicturepicture{tpexample}{ciad-title-background-left9}
+\begin{textpictureframe}{Example of left text and right picture}{tpexample}
+  This is the standard frame content.
+\end{textpictureframe}
+```
+
+##### Slide with a Single Figure (Full Slide Image)
+
+**Command:** `\figureslide`
+
+Displays a picture that fills the entire drawing area of the slide. The title is overlaid on top.
+
+```latex
+\figureslide[options]{Title of the slide}{file}
+```
+
+| Option           | Description                                           |
+|------------------|-------------------------------------------------------|
+| `width=<length>` | Width of the image                                    |
+| `height=<length>`| Height of the image                                   |
+| `scale=<float>`  | Scaling factor                                        |
+| `valign=t/c/b`   | Vertical alignment: top, center, bottom               |
+| `halign=l/c/r`   | Horizontal alignment: left, center, right             |
+| `label=<text>`   | Label for the frame (for `\hyperlink`)                |
+| `subtitle=<text>`| Subtitle displayed below the main title               |
+
+**Example:**
+```latex
+\figureslide[width=\linewidth, valign=c]{CIAD Logo}{ciadlogo}
+```
+
+##### Slide with an Animated Figure (AutoLaTeX)
+
+**Command:** `\animatedfigureslide`
+
+Displays an animated figure (built with [AutoLaTeX](/latex/autolatex/)) that changes according to Beamer overlay specifications.
+
+```latex
+\animatedfigureslide<framespec>[options]{title}{file}
+```
+
+* `<framespec>` – Beamer overlay specification (e.g., `<1-3>`).
+* `options` – same as for `\figureslide`.
+* `title` – slide title.
+* `file` – name of the figure (without extension) that was processed by AutoLaTeX.
+
+###### Prerequisites
+
+1. Install **AutoLaTeX** (http://www.arakhne.org/autolatex).
+2. Create an SVG file with layers named like `Layer1 <1-3>`, `Layer2 <2>`, etc.
+3. Run AutoLaTeX to generate the `.pdftex_t` file.
+4. Include the package `\usepackage{autolatex-beamer}`.
+
+**Alternative inclusion method** (low‑level):
+```latex
+\includeanimatedfigure<framespec>[options]{texfilename}
+```
+
+**Example:**
+```latex
+\usepackage{autolatex-beamer}
+% ...
+\animatedfigureslide{Animated Demonstration}{myanimation}
+```
+
+##### Slide with an Embedded Video
+
+**Command:** `\embeddedvideoslide`
+
+Embeds a video directly into the PDF. The video can be played in viewers that support embedded multimedia (e.g., [pdfpc](https://pdfpc.github.io/)).
+
+```latex
+\embeddedvideoslide[options]{Title of the slide}{video file}{image file}
+```
+
+* `options` – same as for `\figureslide` (width, height, scale, valign, halign, label, subtitle).
+* `video file` – path to the video (e.g., `movie.mp4`).
+* `image file` – fallback image shown when the video cannot be displayed.
+
+**Example:**
+```latex
+\embeddedvideoslide[width=\linewidth]{Demonstration}{demo.mp4}{placeholder.png}
+```
+
+##### Slide with Text, Video, and Logos
+
+**Environment:** `textvideoframe`
+
+Similar to `textpictureframe`, but the right area contains a video instead of a static picture. Logos can be placed below the video.
+
+```latex
+\begin{textvideoframe}[options]{main title}{video-path}{picture-path}
+  Content of the slide (text on the left)
+\end{textvideoframe}
+```
+
+* `video-path` – path to the video file.
+* `picture-path` – fallback image displayed if the video cannot be shown.
+
+To add text below the video (e.g., a credit or logo caption), use:
+
+```latex
+\settextvideofooter{text}
+```
+
+**Example:**
+```latex
+\settextvideofooter{XYZ Labs}
+\begin{textvideoframe}{Example with Video}{demo.mp4}{placeholder.png}
+  This text appears on the left.
+\end{textvideoframe}
+```
+
+
+
+
+
+
+### 8. Defining the content of the slides
+
+#### 8.1 Overlay Commands for Dynamic Slides
+
+The CIAD template fully supports Beamer's overlay mechanism, allowing content to appear incrementally.
+
+##### Basic Overlay Command: `\pause`
+
+```latex
+\begin{frame}{Incremental Content}
+    First point appears immediately.
+    \pause
+    Second point appears on next click.
+    \pause
+    Third point appears after another click.
+\end{frame}
+```
+
+The command `\pause` permits to make a pause in the displaying of the frame's content.
+
+##### Conditional Display Commands
+
+You could also specify how the content is displayed by using on of the following conditional display commands:
+
+| Command | Effect |
+|---------|--------|
+| `\only<overlay-spec>{text}` | Includes text only on specified slides (occupies no space otherwise) |
+| `\alt<overlay-spec>{text1}{text2}` | Shows text1 on specified slides, text2 otherwise |
+| `\visible<overlay-spec>{text}` | Shows text on specified slides, but reserves space |
+| `\invisible<overlay-spec>{text}` | Hides text on specified slides, but reserves space |
+
+The format of the overlay specifications are based :
+
+* `<1>` – slide 1 only
+* `<1-3>` – slides 1 through 3
+* `<1,3,5>` – slides 1, 3, and 5
+* `<1-2,4>` – slides 1, 2, and 4
+* `<+>` – next slide in sequence
+* `<.(1)>` – slide number relative to current
+
+##### Example: Overlay with Lists
+
+```latex
+\begin{frame}{Key Characteristics of Agents}
+    \begin{itemize}
+        \item<1-> Autonomy
+        \item<2-> Social ability
+        \item<3-> Reactivity
+        \item<4-> Proactiveness
+    \end{itemize}
+\end{frame}
+```
+
+#### 8.2 Block Environments
+
+The CIAD template enhances the standard Beamer blocks with custom styling.
+
+| Environment | Purpose | Visual Style |
+|-------------|---------|--------------|
+| `block` | Standard content block | Neutral background |
+| `alertblock` | Warning or important content | Alert color scheme |
+| `exampleblock` | Example content | Example color scheme |
+| `definition` | Formal definition | Definition styling |
+| `theorem` | Mathematical theorem | Theorem styling |
+| `proof` | Proof environment | Proof styling |
+
+##### Example Usage
+```latex
+\begin{frame}{Multiagent System Concepts}
+    \begin{definition}
+        A \textbf{multiagent system (MAS)} is a system composed of multiple interacting intelligent agents.
+    \end{definition}
+    
+    \begin{exampleblock}{Example}
+        A traffic intersection where autonomous vehicles negotiate right-of-way.
+    \end{exampleblock}
+    
+    \begin{alertblock}{Important}
+        Agents must maintain autonomy while cooperating.
+    \end{alertblock}
+\end{frame}
+```
+
+#### 8.2 Column Layouts
+
+The `columns` environment enables side-by-side content placement.
+
+```latex
+\begin{frame}{Two-Column Layout}
+    \begin{columns}[T]  % T = top alignment for all columns
+        \begin{column}{0.5\linewidth}
+	    Left column content...
+        \end{column}
+        \begin{column}{0.48\linewidth}
+            Right column content...
+        \end{column}
+    \end{columns}
+\end{frame}
+```
+
+### 9. Writing the 5‑Slide Presentation – A Complete Example
+
+Now let's put everything together. I will write a 5‑slide introduction to **multiagent systems** that follows the typical structure of a short talk:
+
+1. **Title slide** (generated automatically)
+2. **What is a Multiagent System?** (definition and key characteristics)
+3. **Agent–Environment Interaction** (core diagram)
+4. **Why Multiagent Systems?** (applications and benefits)
+
+For slide 3 I will provide a simple **SVG diagram** that you can use directly.
+
+### 9.1 The SVG diagram – Agent–Environment Interaction
+
+Save the [image](./agent_environment_diagram.svg) as `agent_environment_diagram.svg`. It shows an agent and its relation with the environment.
+
+#### 9.2 The complete LaTeX source
+
+Create a file named `presentation.tex` with the following content. This file includes the preamble (which we can also put in a separate file) and the five frames.
+
+```latex
+% presentation.tex
+\documentclass[english,partsectioncirclenumberstyle,nocarnotlogo,noubelogo]{ciadbeamer}
+
+% ========== PREAMBLE ==========
+
+\addauthor*[Y.~Student]{Your Name}
+\addauthor*[S.~Galland]{Stéphane Galland}   % optional
+
+\event[Course MAS – 2026]{Introduction to Multiagent Systems – Short Talk}
+
+\title{An Introduction to Multiagent Systems}
+
+\usefootlinewithsections
+
+% ========== BEGIN DOCUMENT ==========
+\begin{document}
+
+% --- Slide 1: What is a Multiagent System? ---
+\begin{frame}{What is a Multiagent System?}
+    \begin{definitionblock}{Multiagent System}
+        A \Emph{Multiagent System (MAS)} is a system composed of multiple interacting intelligent agents within an environment.
+    \end{definitionblock}
+    \vspace{0.5cm}
+    \Emph{Key characteristics:}
+    \begin{description}
+        \item[Autonomy:] agents operate without direct human intervention.
+        \item[Social ability:] agents interact via communication or indirect influence.
+        \item[Reactivity:] agents perceive their environment and respond in a timely fashion.
+        \item[Proactiveness:] agents exhibit goal‑directed behaviour.
+    \end{description}
+\end{frame}
+
+% --- Slide 2: Agent–Environment Interaction (with PDF figure that will be generated from the SVG figure, see AutoLaTeX) ---
+\figureslide{Agent–Environment Interaction}{agent_environment_diagram}
+
+% --- Slide 3: Why Multiagent Systems? ---
+\begin{frame}{Why Multiagent Systems?}
+    \Emph{Applications:}
+    \begin{columns}[T]
+        \begin{column}{0.5\linewidth}
+            \begin{itemize}
+                \item Robotics (swarm robotics)
+                \item Traffic simulation
+                \item E‑commerce (automated negotiations)
+                \item Distributed control (smart grids)
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \begin{itemize}
+                \item Social simulation
+                \item Disaster response
+                \item Game AI
+                \item Cloud resource management
+            \end{itemize}% --- Slide 4: Further Reading ---
+\libraryslide[2nd edition]{wooldridge_cover}{An Introduction to Multiagent Systems}{Michael Wooldridge}{Wiley, 2009}{978-0-470-51946-2}
+
+        \end{column}
+    \end{columns}
+    \vspace{0.5cm}
+    \Emph{Benefits:}
+    \begin{description}
+        \item[Modularity] each agent can be designed and tested independently.
+        \item[Robustness] failure of one agent does not crash the whole system.
+        \item[Parallelism] agents act simultaneously, increasing efficiency.
+    \end{description}
+\end{frame}
+
+\end{document}
+```
+
+#### 9.3 Explanations of the code
+
+- **Definition**: The `definitionblock` environment is provided by the CIAD template (it is a coloured box). You can also use `definition`, `block`, `exampleblock`, or `alertblock` that are part of the standard Beamer library.
+- **Columns**: Standard Beamer columns are used to split the applications list into two columns, making the slide more balanced.
+- **Figure slide**: The `\figureslide` command expects the image file name without extension. The template will search for `agent_environment_diagram.pdf` (or `.png`/`.jpg`) in the paths defined in the preamble.
+
+> **Important:** The SVG file must be converted to PDF or PNG for inclusion in a LaTeX document compiled with pdfLaTeX. You can do this automatically by running [AutoLaTeX](/latex/autolatex/), or `pdflatex` with the `--shell-escape` option if you have the `svg` package loaded, or simply convert the SVG to PDF using an external tool (Inkscape, ImageMagick, etc.). For simplicity, I recommend saving the diagram as a **PDF** file (`agent_environment_diagram.pdf`) and placing it in the `imgs/` folder.
+
+### 10. Compiling the Presentation
+
+The easiest way to compile the presentation is to use [**AutoLaTeX**](/latex/autolatex/). If you have it installed, open a terminal in the folder containing `presentation.tex` and run:
+
+```bash
+autolatex -f presentation
+```
+
+AutoLaTeX will automatically run `pdflatex` the required number of times, process the bibliography (if any), and generate the final `presentation.pdf`.
+
+If you prefer to use a standard LaTeX toolchain, run:
+
+```bash
+pdflatex presentation
+pdflatex presentation   # second pass for cross‑references
+```
+
+After the second pass, you will have `presentation.pdf` ready to present.
+
+### 11. Customising the Look and Feel
+
+The CIAD template offers many configuration parameters beyond what we used. Please refer to the [official documentation](/download/latex/ciad - slides/documentation.pdf).
+
+### 12. Summary
+
+You have now created a short but complete introduction to multiagent systems using the CIAD Beamer template. The key points we covered are:
+
+1. **How to obtain and install** the CIAD Beamer template.
+2. **The main class options** and their meanings.
+3. **Structuring the preamble** – title, authors, event, logos, graphics paths.
+4. **Creating slides** – using standard frames and custom commands like `\figureslide` and `\libraryslide`.
+5. **A concrete 5‑slide example** that you can adapt for your own research talks.
+6. **Compilation methods** – using AutoLaTeX or plain `pdflatex`.
+
+The CIAD template is a powerful tool that will give your presentations a consistent, professional look. By following this tutorial, you have learned the essential parts of the template and can now concentrate on the content of your research.
+
+**Good luck with your presentation!** If you encounter any problems, the template's documentation (included in the downloaded archive) contains a complete reference of all commands and options.
+
