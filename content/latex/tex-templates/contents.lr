@@ -42,9 +42,9 @@ TeX-templates provides the styles for writing a PhD thesis dissertations with th
 
 | Description | Info | Examples | Ubuntu |
 |-------------|------|----------|--------|
-| [Université de Technologie de Belfort-Montbéliard](http://www.utbm.fr) | Documentation and examples are included: [download](../../download/latex/phd - these/spimutbmphdthesis.tar.gz) | ![front](./spimutbm_frontcover.jpg) ![page](./spimutbm_page.jpg) ![page](./spimutbm_backcover.jpg) | `tex-templates-utbm-phdthesis` |
-| [Université Bourgogne Europe](http://www.ube.fr) | Documentation and examples are included: [download](../../download/latex/phd - these/spimubephdthesis.tar.gz) | ![front](./spimube_frontcover.jpg) ![page](./spimube_page.jpg) ![page](./spimube_backcover.jpg) | `tex-templates-ube-phdthesis` |
-| [Université Marie et Louis Pasteur](http://www.umlp.fr) | Documentation and examples are included: [download](../../download/latex/phd - these/spimumlpphdthesis.tar.gz) | ![front](./spimumlp_frontcover.jpg) ![page](./spimumlp_page.jpg) ![page](./spimumlp_backcover.jpg) | `tex-templates-umlp-phdthesis` |
+| [Université de Technologie de Belfort-Montbéliard](http://www.utbm.fr) | Documentation and examples are included: [**Download**](../../download/latex/phd - these/spimutbmphdthesis.tar.gz) - [**Tutorial**](./phddissertation_tutorial.html) | ![front](./spimutbm_frontcover.jpg) ![page](./spimutbm_page.jpg) ![page](./spimutbm_backcover.jpg) | `tex-templates-utbm-phdthesis` |
+| [Université Bourgogne Europe](http://www.ube.fr) | Documentation and examples are included: [**Download**](../../download/latex/phd - these/spimubephdthesis.tar.gz) - [**Tutorial**](./phddissertation_tutorial.html) | ![front](./spimube_frontcover.jpg) ![page](./spimube_page.jpg) ![page](./spimube_backcover.jpg) | `tex-templates-ube-phdthesis` |
+| [Université Marie et Louis Pasteur](http://www.umlp.fr) | Documentation and examples are included: [**Download**](../../download/latex/phd - these/spimumlpphdthesis.tar.gz) - [**Tutorial**](./phddissertation_tutorial.html) | ![front](./spimumlp_frontcover.jpg) ![page](./spimumlp_page.jpg) ![page](./spimumlp_backcover.jpg) | `tex-templates-umlp-phdthesis` |
 
 ### 3. French Research Supervision Accreditation
 

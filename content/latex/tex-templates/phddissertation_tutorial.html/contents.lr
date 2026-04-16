@@ -1,0 +1,640 @@
+title: Tutorial: create a PhD dissertation with TeX-templates
+---
+languages: LaTeX
+---
+pub_date: 2026-04-16
+---
+author: Stéphane Galland:https://github.com/gallandarakhneorg
+---
+body:
+
+This tutorial will guide you step by step through the process of writing your PhD dissertation using the **SPIM doctoral school** LaTeX template that is provided by [TeX-templates](/latex/tex-templates/). The template is built on top of the powerful [TeX-UPmethodology](/latex/tex-upmethodology) package suite, which provides many convenient macros for professional document formatting.
+
+By the end of this tutorial, you will have a fully functional LaTeX document that includes:
+
+- A properly formatted front page with thesis title, author, jury members, and logos
+- Bilingual abstracts (French and English) and keywords
+- A table of contents, list of figures, list of tables, and list of definitions
+- Structured chapters with optional lettrine (dropped capital) and local table of contents
+- Environments for definitions, theorems, research questions, objectives, and contributions
+- Advanced tables and figures with captions and source references
+- Inline enumerations, customised description lists
+- Bibliographies (general and personal)
+- Appendices
+
+### Prerequisites
+
+Before starting, ensure that you have:
+
+* A working LaTeX distribution (TeX Live, MiKTeX, MacTeX).
+* The [TeX-UPmethodology](/latex/tex-upmethodology) package suite installed.
+  *If not installed, download it from [http://www.arakhne.org/tex-upmethodology/](http://www.arakhne.org/tex-upmethodology/) and follow the installation instructions (copy to your texmf tree and run `mktexlsr`).*
+* The `spimutbmphdthesis` document class and its associated files, included in [TeX-templates](/latex/tex-templates/).
+  *These files are specific to the UTBM/SPIM doctoral school. [TeX-templates](/latex/tex-templates/) also includes the templates for UBE/SPIM and UMLP/SPIM. You have just to change the name of the document class to `spimubephdthesis` and `spimumlpphdthesis`, respectively.*
+
+### Step 1: Create the main LaTeX file
+
+Create a new file, e.g. `mythesis.tex`, and open it in your favourite LaTeX editor. Start with the following minimal structure:
+
+```latex
+\documentclass[english]{spimutbmphdthesis}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Introduction}
+Your first chapter content.
+
+\backmatter
+\bibliographystyle{spimphdthesis}
+\bibliography{biblio}
+
+\end{document}
+```
+
+**Explanation of each line:**
+
+* `\documentclass[english,natbib]{spimutbmphdthesis}`  
+  The document class specific to UTBM/SPIM theses. Options:
+  * `english` (or `french`) – sets the main language of the thesis.
+  * `natbib` (or `nonatbib`) - enables (or disables) the support for NatBib, a powerfull LaTeX library for bibliography citations. `natbib` is the default.
+  * You can also pass options like `draft`, `watermark`, etc. (see `upmethodology-document` documentation).
+
+* `\begin{document}` – starts the document body.
+
+* `\frontmatter` – switches to Roman page numbering and disables chapter numbering for the preliminary pages.
+
+* `\maketitle` – generates the front page (using the metadata you will define later).
+
+* `\tableofcontents` – prints the table of contents.
+
+* `\mainmatter` – switches to Arabic page numbering and restarts chapter numbering.
+
+* `\chapter{Introduction}` – a sample chapter.
+
+* `\backmatter` – switches to unnumbered chapters for bibliography, lists, and appendices.
+
+* `\bibliographystyle{spimphdthesis}` – sets the bibliography style (provided by the template).
+
+* `\bibliography{biblio}` – points to your BibTeX database file (`biblio.bib`).
+
+### Step 2: Declare thesis metadata
+
+Before `\begin{document}`, you must declare all the information that will appear on the front page, the back page, and in the document summary.
+
+Add the following in your preamble (after `\documentclass` and before `\begin{document}`):
+
+```latex
+% --- Thesis title and subtitle ---
+\declarethesis[Subtitle of my thesis]{Main Title of My Thesis}{\ifenglish{20 April 2025}{20 avril 2025}}{Belfort}{2025-01}
+
+% --- Title in the secondary language (French if thesis is in English, vice versa) ---
+\declareminorthesistitle{Titre en français de ma thèse}
+
+% --- Author ---
+\addauthor[my.email@utbm.fr]{John}{Doe}
+
+% --- Jury members ---
+\addjury{Captain}{America}{\roleReviewerM}{Professor at USA University}
+\addjuryex{Dr.}{Jane}{Smith}{\roleDirectorF}{Professor at UTBM}
+% (Add as many as needed, see details below)
+
+% --- Abstracts and keywords ---
+\thesisabstract[english]{This is the abstract in English. It should be a concise summary of your work.}
+\thesiskeywords[english]{Keyword 1, Keyword 2, Keyword 3}
+
+\thesisabstract[french]{Ceci est le résumé en français. Il doit être une synthèse concise de vos travaux.}
+\thesiskeywords[french]{Mot-clé 1, Mot-clé 2, Mot-clé 3}
+
+% --- Laboratory affiliation ---
+\addlaboratory{Laboratoire Connaissance et Intelligence Artificielle Distribuées}
+\setlaboratorylogo{bigciadlogo}  % replace with your actual logo file name
+
+% --- Partner logos (optional) ---
+\addpartner[width=2cm]{myotherlogo}
+% You can add more 
+
+% --- Set the speciality (official name of your doctoral field) ---
+\SetLangDefault{english}{speciality}{Artificial Intelligence}
+\SetLangDefault{french}{speciality}{Intelligence Artificielle}
+```
+
+**Explanation of each command:**
+
+* `\declarethesis[subtitle]{title}{date}{location}{reference}`  
+  * `subtitle` (optional) – appears below the main title.  
+  * `title` – the main title of your thesis.  
+  * `date` – the date of your PhD defense (format flexible, e.g., `20 April 2025`). Here, we recommended to use `\ifenglish{date in English}{date in French}` to let the template to use the correct language depending of the context of usage of the date.
+  * `location` – city where the defense takes place (e.g., `Belfort`).  
+  * `reference` – the registration number assigned by the university library after the defense. Keep it empty if you don't know it.
+
+* `\declareminorthesistitle{title}` – the title in the other language (e.g., French if your thesis is written in English). This appears on the back page and sometimes on the secondary front page.
+
+* `\addauthor[email]{firstname}{lastname}` – registers the author (you).
+
+* `\addjury{firstname}{lastname}{role}{position}` – adds a jury member without a courtesy title (Mr./Ms./Dr.).  
+  `\addjuryex[email]{civility}{firstname}{lastname}{role}{position}` – adds a jury member with a courtesy title.  
+  The `role` must be one of the predefined commands:
+  
+| Command               | Role in the jury |
+|-----------------------|------------------|
+| `\rolePresidentM`     | The person, who is male, is the President of the jury ("Président" in French) |
+| `\rolePresidentF`     | The person, who is female, is the President of the jury ("Présidente" in French) |
+| `\roleReviewerM`      | The person, who is male, is one of the reviewers of your PhD dissertation ("Rapporteur" in French) |
+| `\roleReviewerF`      | The person, who is female, is one of the reviewers of your PhD dissertation ("Rapporteuse" in French) |
+| `\roleExaminerM`      | The person, who is male, is a regular examiner in the jury ("Examinateur" in French) |
+| `\roleExaminerF`      | The person, who is female, is a regular examiner in the jury ("Examinatrice" in French) |
+| `\roleDirectorM`      | The person, who is male, is your primary PhD Director ("Directeur" in French) |
+| `\roleDirectorF`      | The person, who is female, is your primary PhD Director ("Directrice" in French) |
+| `\roleCodirectorM`    | The person, who is male, is one of your secondary PhD Directors ("Codirecteur" in French) |
+| `\roleCodirectorF`    | The person, who is female, is one of your secondary PhD Directors ("Codirectrice" in French) |
+| `\roleSupervisorM`    | The person, who is male, is one of your regular supervisors ("Encadrant" in French) |
+| `\roleSupervisorF`    | The person, who is female, is one of your regular supervisors ("Encadrante" in French) |
+| `\roleCosupervisorM`  | The person, who is male, is one of your regular cosupervisors ("Coencadrant" in French) |
+| `\roleCosupervisorF`  | The person, who is female, is one of your regular cosupervisors ("Coencadrante" in French) |
+| `\roleInviteeM`       | The person, who is male, is invited to participate to your jury ("Invité" in French) |
+| `\roleInviteeF`       | The person, who is female, is invited to participate to your jury ("Invitée" in French) |
+
+* `\thesisabstract[lang]{text}` – stores the abstract for the given language. The language of the document (the one passed to `\documentclass`) determines which abstract is considered "primary" (appears first on the back page).
+ 
+* `\thesiskeywords[lang]{keywords}` – similarly stores keywords.
+
+* `\addlaboratory{description}` – adds the name of your research laboratory affiliation if you want it on the front page.
+
+* `\setlaboratorylogo[options]{filename}` – sets the logo of your main laboratory (appears on the front page, top center). The optional argument can contain `\includegraphics` options (e.g., `width=3cm`).
+
+* `\addpartner[options]{filename}` – adds a partner/sponsor logo on the front page. The optional argument can contain `\includegraphics` options (e.g., `width=3cm`).
+
+* `\SetLangDefault{language}{key}{value}` – defines a language‑specific text. Here we set the speciality name in both languages. The key `speciality` is used on the front page after "Doctor in ...".
+
+
+### Step 3: Write your chapters
+
+Inside the `\mainmatter` section, you will write the core of your thesis. The template provides several useful environments and commands.
+
+#### 3.1 Basic chapter structure
+
+```latex
+\chapter{Introduction}
+
+% Optional: start with a lettrine (dropped capital) and a local table of contents
+\chapterintro   % This will look ahead for the first \section and put a lettrine on the first letter of the following text.
+
+To help you write your thesis, several tools are described below. Many other macros are available...
+
+\section{Motivation}
+...
+\section{Contributions}
+...
+```
+
+`\chapterintro` (starred version `\chapterintro*` disables the local TOC) analyses the text that follows. It places a lettrine on the first letter of the first word and, if the `etoc` package is loaded, inserts a local table of contents before the first `\section`.  
+*If you do not want a lettrine, simply omit `\chapterintro`.*
+
+#### 3.2 Definitions, theorems, and similar environments
+
+The template already defines a `definition` environment. You can use it as follows:
+
+```latex
+\begin{definition}{Name of the definition}{label}
+   Text of the definition.
+\end{definition}
+```
+
+Example:
+
+```latex
+\begin{definition}{Multi-Agent System}{mas}
+  A Multi-Agent System (MAS) is a system composed of multiple interacting intelligent agents.
+\end{definition}
+```
+
+To reference it later: `Definition \ref{def:mas}` (the label prefix `def:` is added automatically when you write the definition).
+The command  `\defref{mas}` may be used as an equivalent to `\ref{def:mas}`.
+For page reference: `\defpageref{mas}` or `\pageref{def:mas}`.
+
+If you need additional theorem‑like environments (theorem, lemma, corollary, etc.), you can declare them in the preamble:
+
+```latex
+\declareupmtheorem{mytheorem}{My Theorem}{List of my Theorems}{mythm}{mytheorem}{\textbf}
+```
+
+* `mytheorem` (first argument) - the name of the LaTeX environment that is used in all commands.
+* `My Theorem` (second argument) - the text to be displayed in the header of the theorem box.
+* `List of my Theorems` (third argument) - the text to be used as the title of the "list of theorem" chapter.
+* `mythm` (fourth argument) - the prefix to be automatically appended to the reference labels (similar to the `def` above for definitions).
+* `mytheorem` (fifth argument) - name for the file containing the list of theorems.
+* `\textbf` (sixth argument) - command that is used for formatting the source information associated to a theorem.
+
+Then use:
+
+```latex
+\begin{mytheorem}{Theorem of Everything}{everything}
+This is the theorem.
+\end{mytheorem}
+```
+
+You can also add a source as an optional argument:
+
+```latex
+\begin{mytheorem}{Theorem of Everything}{everything}[Galland et al., 2025]
+...
+\end{mytheorem}
+```
+
+At the end of your document, you can list all theorems with `\listofmytheorems`.
+
+#### 3.3 Research questions, objectives, contributions
+
+The package provides three dedicated environments that produce colourful boxes with counters (RQ1, O1, C1, etc.):
+
+```latex
+\begin{researchquestion}[A short title]
+Description of the research question.
+\end{researchquestion}
+
+\begin{objective}[A short title]
+Description of the objective.
+\end{objective}
+
+\begin{contribution}[A short title]
+Description of the contribution.
+\end{contribution}
+```
+
+The starred versions omit the counter:
+
+```latex
+\begin{researchquestion*}...
+```
+
+These are perfect for highlighting the key elements of your thesis.
+
+#### 3.4 Figures
+
+Including figures in LaTeX always needs many commands (figure environment, caption, label, inclusion of the drawing, etc.). TeX-templates provides a macro for making all these things for you. So that, the simplest way to include a figure is with `\mfigure`:
+
+```latex
+\mfigure[ht]{width=0.8\linewidth}{myfigure}{Caption of the figure}{example}
+```
+
+Parameters:
+- `[ht]` – placement options (h=here, t=top, b=bottom, p=page of floats).
+- `{width=0.8\linewidth}` – options passed to `\includegraphics`.
+- `{myfigure}` – filename of the image (without extension, supports .pdf, .png, .jpg, etc.).
+- `{Caption...}` – the figure caption.
+- `{example}` – label (the prefix `fig:` is added automatically).
+
+Refer to the figure with `\figref{example}` or `\ref{fig:example}`, and its page with `\figpageref{example}` or `\pageref{fig:example}`.
+
+You can also add a source text:
+
+```latex
+\mfigure[ht]{width=0.8\linewidth}{myfigure}{Caption}{example}[Source: From Smith et al.]
+```
+
+For figures including subfigures, use the `mfigures` environment:
+
+```latex
+\begin{mfigures}[ht]{Main caption}{main}
+  \msubfigure{width=0.45\linewidth}{subfig1}{First subfigure}
+  \hfill
+  \msubfigure{width=0.45\linewidth}{subfig2}{Second subfigure}
+\end{mfigures}
+```
+
+This environment builds a big figure with caption `Main caption` and the label `fig:main`.
+Then, you could add a subfigure with `\msubfigure` followed by the options to pass to `\includegraphics`, the filename of the drawing and the caption of the subfigure. This subfigure will be assigned automatically to a label with the value `fig:main:IDX`, where the prefix is the label of the enclosing figure, and `IDX` is replaced by the alphabetic index of the subfigure in the list of subfigures, i.e., `a` for the first, `b` for the second, `c` for the third, etc.
+
+#### 3.5 Tables
+
+Use the `mtable` environment for floating tables with a caption:
+
+```latex
+\begin{mtable}[ht]{0.9\linewidth}{3}{|l|X|c|}{Comparison of methods}{comparison}
+  \tabularheader{Method}{Description}{Accuracy}
+  A & This is a long description that will wrap & 95\% \\
+  B & Another description & 88\% \\
+\end{mtable}
+```
+
+Parameters:
+* `[ht]` – placement.
+* `{0.9\linewidth}` – total width of the table.
+* `{3}` – number of columns.
+* `{|l|X|c|}` – column specification (l=left, r=right, c=center, X=flexible width, | = vertical line).
+* `{Comparison...}` – caption.
+* `{comparison}` – label (prefix `tab:` added automatically).
+* `\tabularheader` – defines the header row (with background colour). The number of arguments for this command is the same as the number of columns of the table.
+
+You can add a source with `\addsource{...}` and a table note with `\tablenote{...}`.
+
+For long tables spanning several pages, use `mlongtabular` (non‑floating). Example of a long table:
+
+```latex
+\begin{mlongtabular}[\linewidth]{3}{l|X|c}{Top title}
+  \tabularheader{Col1}{Col2}{Col3}\\
+  Row 1 & data & value \\
+  Row 2 & more data & 42 \\
+  % ... many rows
+\end{mlongtable}
+```
+
+Parameters:
+* `[\linewidth]` – total width of the table.
+* `{3}` – number of columns.
+* `{l|X|c}` – column specification (l=left, r=right, c=center, X=flexible width, | = vertical line).
+* `{Top...}` – title at the top of the table.
+
+
+#### 3.6 Lists, enumerations and descriptions
+
+The standard `itemize`, `enumerate` and `description` work as usual. But the template enhances them:
+
+##### Description with custom separator
+
+```latex
+\begin{description}
+  \item[Term 1] Definition 1.
+  \item[Term 2] Definition 2.
+\end{description}
+```
+
+Example of result:
+> * **Term 1:** Definition 1.
+> * **Term 2:** Definition 2.
+
+
+By default, the separator is `: `. You can change it globally or for a single environment by passing an optional argument:  
+`\begin{description}[//]` would use `//` as separator.
+
+##### Enumerate with descriptions (mixed numbering and description)
+
+```latex
+\begin{enumerate}
+  \item[First point] Explanation of first point.
+  \item[Second point] Explanation of second point.
+\end{enumerate}
+```
+
+Example of result:
+> 1. **First point:** Explanation of first point.
+> 2. **First point:** Explanation of second point.
+
+You can also specify the numbering style:
+
+```latex
+\begin{enumerate}[1]   % Arabic numerals
+\begin{enumerate}[i]   % lower‑case Roman
+\begin{enumerate}[a]   % lower‑case letters
+\begin{enumerate}[A]   % upper‑case letters
+```
+
+Example of result with `[i]`:
+> i. **First point:** Explanation of first point.
+
+> ii. **First point:** Explanation of second point.
+
+Example of result with `[a]`:
+> a. **First point:** Explanation of first point.
+
+> b. **First point:** Explanation of second point.
+
+Example of result with `[A]`:
+> A. **First point:** Explanation of first point.
+
+> B. **First point:** Explanation of second point.
+
+
+##### Inline enumeration (inside a paragraph)
+
+```latex
+You can list items inline: \begin{inlineenumeration}
+  \item first,
+  \item second,
+  \item third.
+\end{inlineenumeration} This continues the paragraph.
+```
+
+Example of result: You can list items inline: _(i)_ first, _(ii)_ second, _(iii)_ third. This continues the paragraph.`
+
+
+#### 3.7 Text formatting helpers
+
+- `\textup{text}` – superscript in text mode (e.g., `1\textup{st}`).
+- `\textdown{text}` – subscript in text mode.
+- `\emph{text}` – emphasised (italic).
+- `\Emph{text}` – very important (bold and coloured).
+- `\makename{first}{last}` – formats a person's name (e.g., `\makename{John}{Doe}` → "John DOE").
+- `\drname{first}{last}` – adds "Dr." prefix.
+- `\phdname{first}{last}` – adds "Ph.D." prefix.
+
+#### 3.8 Mathematical symbols
+
+The template predefines several useful math commands:
+
+```latex
+$\R$   % ℝ
+$\N$   % ℕ
+$\Z$   % ℤ
+$\Q$   % ℚ
+$\C$   % ℂ
+$\powerset{A}$   % 𝒫(A)
+$\sgn(x)$        % sign function
+```
+
+#### 3.9 Algorithms (if you use the `algorithm` package)
+
+Load the `algorithm` package in your preamble:
+
+```latex
+\usepackage{algorithm}
+\usepackage{algorithmic}
+```
+
+Then use:
+
+```latex
+\begin{algorithm}
+  \caption{My algorithm}
+  \label{alg:myalgo}
+  \begin{algorithmic}[1]
+    \STATE $x \gets 0$
+    \WHILE{$x < 10$}
+      \STATE $x \gets x+1$
+    \ENDWHILE
+  \end{algorithmic}
+\end{algorithm}
+```
+
+The template provides colours for algorithm captions and borders; you can customise them with `\colorlet{algorithmcaptionlabel}{blue}`, etc.
+
+#### 3.10 Emphasising boxes
+
+For highlighting important text:
+
+```latex
+\begin{emphbox}{0.7\linewidth}
+  This is an important statement.
+\end{emphbox}
+```
+
+For boxes with a title:
+
+```latex
+\begin{titleemphbox}{0.7\linewidth}{Important}
+  Content.
+\end{titleemphbox}
+```
+
+There are three variants: `titleemphbox`, `titleemphbox2`, `titleemphbox3` (different background colours).
+
+Message boxes (caution, info, question) are also available:
+
+```latex
+\begin{upmcaution}
+  Be careful about this.
+\end{upmcaution}
+
+\begin{upminfo}
+  Useful information.
+\end{upminfo}
+
+\begin{upmquestion}
+  What is the meaning of life?
+\end{upmquestion}
+```
+
+#### 3.11 Footnotes that can be recalled
+
+You can define a footnote once and reuse its reference number later:
+
+```latex
+Some text.\savefootnote{This is a footnote}{myfn}
+Later, you can refer to it again: \reffootnote{myfn}
+```
+
+The starred version `\savefootnote*` defines the footnote but does not print it at that location (useful for footnotes that appear only in later references).
+
+#### 3.12 Acronyms
+
+The template includes the `acro` package. Declare acronyms in the preamble:
+
+```latex
+\DeclareAcronym{MAS}{
+  short = MAS,
+  long  = Multi-Agent System
+}
+\DeclareAcronym{AI}{
+  short = AI,
+  long  = Artificial Intelligence
+}
+```
+
+In the text, use `\ac{MAS}` (first use: "Multi-Agent System (MAS)", subsequent uses: "MAS").  
+Print a list of acronyms with `\printacronyms` (usually placed after the table of contents or at the beginning of the backmatter).
+
+### Step 4: Bibliography management
+
+#### 4.1. Citations with standard BibTeX Command
+
+The template uses BibTeX. Create a file `biblio.bib` with your references in BibTeX format.
+
+To cite works, use `\cite{key}`. The bibliography style `spimphdthesis` (provided) formats citations according to the doctoral school's requirements.
+
+#### 4.2. Citations with NatBib
+
+If you have passed the class option `natbib` (it is the default), then the `natbib` package is included and provides a comprehensive set of citation commands for LaTeX. The two most essential ones are `\citet` and `\citep`.
+
+* `\citet` and `\citep`: The main commands for textual (in‑sentence) and parenthetical (in‑parentheses) citations, respectively. For example, `\citet{jon90}` produces "Jones et al. (1990)", while `\citep{jon90}` gives "(Jones et al., 1990)".
+* `\citet*` and `\citep*`:  prints the full author list instead of the abbreviated "et al." form.
+* You can cite multiple sources at once by including several keys in the same command, separated by commas. For example, `\citep{jon90,jam91}` produces "(Jones et al., 1990; James et al., 1991)".
+
+#### 4.3. Multiple lists of publications (multibib)
+
+If you want to separate your own publications from the general bibliography, you can use the `multibib` package. In the preamble:
+
+```latex
+\usepackage{multibib}
+\newcites{PERSO}{List of my publications}
+```
+
+Then cite your own papers with `\citePERSO{key}` and print the personal bibliography with:
+
+```latex
+\bibliographystylePERSO{spimphdthesis}
+\bibliographyPERSO{biblio.bib}
+```
+
+Place the personal bibliography after the general one.
+
+### Step 5: Appendices
+
+After the main matter, switch to appendices with `\appendix`. Then use `\chapter` for each appendix:
+
+```latex
+\backmatter
+\appendix
+\chapter{Detailed Proofs}
+...
+\chapter{Source Code Listings}
+...
+```
+
+The appendices will be numbered A, B, C, etc.
+
+### Step 6: Lists of figures, tables, definitions, algorithms
+
+At the end of the backmatter, add:
+
+```latex
+\listoffigures
+\listoftables
+\listofdefinitions   % if you used the definition environment
+% \listofalgorithms   % if you used algorithms
+```
+
+These will produce chapters with the corresponding lists.
+
+
+### Step 7: Compilation
+
+To compile your thesis, you need to run LaTeX, BibTeX, and possibly makeindex. A typical sequence:
+
+1. `pdflatex mythesis`
+2. `bibtex mythesis`   (for the general bibliography)
+3. `bibtex PERSO`      (if you used `multibib` for personal bibliography)
+4. `pdflatex mythesis`
+5. `pdflatex mythesis`
+
+If you get warnings about "Label(s) may have changed", run `pdflatex` again.
+
+
+The easiest way to compile the document is to use [**AutoLaTeX**](/latex/autolatex/). If you have it installed, open a terminal in the folder containing `mythesis.tex` and run:
+
+```bash
+autolatex -f mythesis
+```
+or
+```bash
+autolatex
+```
+
+AutoLaTeX will automatically run `pdflatex` the required number of times, process the bibliography (if any), and generate the final `mythesis.pdf`.
+
+
+### Conclusion
+
+You now have a complete roadmap for writing your PhD dissertation with the SPIM/UTBM LaTeX template. The template leverages the powerful `tex-upmethodology` suite, giving you professional‑grade formatting while saving you from writing low‑level LaTeX code.
+
+Remember to:
+* Consult the `upmethodology-doc.pdf` for a full reference of all available commands (many more than covered here).
+* Compile frequently to catch errors early.
+
+Good luck with your PhD writing!
