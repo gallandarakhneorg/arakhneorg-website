@@ -4,6 +4,21 @@ title: Open-Source and Free Software
 ---
 body:
 
-This website was created in 2001 by Stéphane Galland. It is a place where you could find several open-source software that are written or published by him or the other contributors to Arakhnê.org.
+Arakhnê.org is a long-standing website dedicated to the creation and distribution of **open-source and free software**. Founded in 2001 by Stéphane Galland, it serves as a central hub for a suite of software tools and libraries, primarily written in Java or LaTeX, that aim to provide developers with powerful resources not always available in standard APIs.
 
-You could also find these contributions through the [Ubuntu packages](./linux/ubuntu) or our [Maven server](./java/maven-repository) dedicated to the development versions of our projects.
+### A Hub of Open-Source Projects
+
+The website hosts several notable projects, including:
+
+*   **AutoLaTeX**: A tool designed to automate the process of building LaTeX documents, a popular system for typesetting complex documents, especially in academia.
+*   **TeX-UPmethodology**: A LaTeX theme for creating professional reports and books.
+*   **TeX-templates**: A collection of LaTeX themes for slides, PhD dissertations, reports, etc.
+
+### Arakhnê Foundation Classes (AFC)
+
+At the heart of Arakhnê.org's development efforts are the **Arakhnê Foundation Classes (AFC)**, a comprehensive collection of Java libraries designed to make application building more efficient.
+
+*   **Utility and Power**: The AFC provides a range of tools that extend the standard Java API, including geometry utilities, a geographical information framework, and more.
+*   **Multi-Language Support**: While a Java library, the AFC is built to be compatible with other JVM languages. It provides specific features and operator overloading for languages such as **SARL** (an agent-oriented language), **Scala**, and **Xtend** to make development more intuitive.
+*   **Easy Integration**: Developers can easily integrate the AFC into their projects. Stable versions of the libraries are published on the Maven Central Repository, while development snapshots are available directly from Arakhnê.org's own Maven server.
+
