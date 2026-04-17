@@ -178,7 +178,7 @@ Add the following in your preamble (after `\documentclass` and before `\begin{do
 
 Inside the `\mainmatter` section, you will write the core of your thesis. The template provides several useful environments and commands.
 
-#### 3.1 Basic chapter structure
+#### 3.1. Basic chapter structure
 
 ```latex
 \chapter{Introduction}
@@ -197,7 +197,7 @@ To help you write your thesis, several tools are described below. Many other mac
 `\chapterintro` (starred version `\chapterintro*` disables the local TOC) analyses the text that follows. It places a lettrine on the first letter of the first word and, if the `etoc` package is loaded, inserts a local table of contents before the first `\section`.  
 *If you do not want a lettrine, simply omit `\chapterintro`.*
 
-#### 3.2 Definitions, theorems, and similar environments
+#### 3.2. Definitions, theorems, and similar environments
 
 The template already defines a `definition` environment. You can use it as follows:
 
@@ -250,7 +250,7 @@ You can also add a source as an optional argument:
 
 At the end of your document, you can list all theorems with `\listofmytheorems`.
 
-#### 3.3 Research questions, objectives, contributions
+#### 3.3. Research questions, objectives, contributions
 
 The package provides three dedicated environments that produce colourful boxes with counters (RQ1, O1, C1, etc.):
 
@@ -276,7 +276,7 @@ The starred versions omit the counter:
 
 These are perfect for highlighting the key elements of your thesis.
 
-#### 3.4 Figures
+#### 3.4. Figures
 
 Including figures in LaTeX always needs many commands (figure environment, caption, label, inclusion of the drawing, etc.). TeX-templates provides a macro for making all these things for you. So that, the simplest way to include a figure is with `\mfigure`:
 
@@ -312,7 +312,7 @@ For figures including subfigures, use the `mfigures` environment:
 This environment builds a big figure with caption `Main caption` and the label `fig:main`.
 Then, you could add a subfigure with `\msubfigure` followed by the options to pass to `\includegraphics`, the filename of the drawing and the caption of the subfigure. This subfigure will be assigned automatically to a label with the value `fig:main:IDX`, where the prefix is the label of the enclosing figure, and `IDX` is replaced by the alphabetic index of the subfigure in the list of subfigures, i.e., `a` for the first, `b` for the second, `c` for the third, etc.
 
-#### 3.5 Tables
+#### 3.5. Tables
 
 Use the `mtable` environment for floating tables with a caption:
 
@@ -353,7 +353,7 @@ Parameters:
 * `{Top...}` – title at the top of the table.
 
 
-#### 3.6 Lists, enumerations and descriptions
+#### 3.6. Lists, enumerations and descriptions
 
 The standard `itemize`, `enumerate` and `description` work as usual. But the template enhances them:
 
@@ -425,17 +425,17 @@ You can list items inline: \begin{inlineenumeration}
 Example of result: You can list items inline: _(i)_ first, _(ii)_ second, _(iii)_ third. This continues the paragraph.`
 
 
-#### 3.7 Text formatting helpers
+#### 3.7. Text formatting helpers
 
-- `\textup{text}` – superscript in text mode (e.g., `1\textup{st}`).
-- `\textdown{text}` – subscript in text mode.
-- `\emph{text}` – emphasised (italic).
-- `\Emph{text}` – very important (bold and coloured).
-- `\makename{first}{last}` – formats a person's name (e.g., `\makename{John}{Doe}` → "John DOE").
-- `\drname{first}{last}` – adds "Dr." prefix.
-- `\phdname{first}{last}` – adds "Ph.D." prefix.
+* `\textup{text}` – superscript in text mode (e.g., `1\textup{st}`).
+* `\textdown{text}` – subscript in text mode.
+* `\emph{text}` – emphasised (italic).
+* `\Emph{text}` – very important (bold and coloured).
+* `\makename{first}{last}` – formats a person's name (e.g., `\makename{John}{Doe}` → "John DOE").
+* `\drname{first}{last}` – adds "Dr." prefix.
+* `\phdname{first}{last}` – adds "Ph.D." prefix.
 
-#### 3.8 Mathematical symbols
+#### 3.8. Mathematical symbols
 
 The template predefines several useful math commands:
 
@@ -449,7 +449,7 @@ $\powerset{A}$   % 𝒫(A)
 $\sgn(x)$        % sign function
 ```
 
-#### 3.9 Algorithms (if you use the `algorithm` package)
+#### 3.9. Algorithms (if you use the `algorithm` package)
 
 Load the `algorithm` package in your preamble:
 
@@ -475,7 +475,7 @@ Then use:
 
 The template provides colours for algorithm captions and borders; you can customise them with `\colorlet{algorithmcaptionlabel}{blue}`, etc.
 
-#### 3.10 Emphasising boxes
+#### 3.10. Emphasising boxes
 
 For highlighting important text:
 
@@ -511,7 +511,7 @@ Message boxes (caution, info, question) are also available:
 \end{upmquestion}
 ```
 
-#### 3.11 Footnotes that can be recalled
+#### 3.11. Footnotes that can be recalled
 
 You can define a footnote once and reuse its reference number later:
 
@@ -522,7 +522,7 @@ Later, you can refer to it again: \reffootnote{myfn}
 
 The starred version `\savefootnote*` defines the footnote but does not print it at that location (useful for footnotes that appear only in later references).
 
-#### 3.12 Acronyms
+#### 3.12. Acronyms
 
 The template includes the `acro` package. Declare acronyms in the preamble:
 
