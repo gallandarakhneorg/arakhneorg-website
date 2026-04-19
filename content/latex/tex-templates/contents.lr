@@ -4,9 +4,9 @@ subtitle: LaTeX Themes for Slides, PhD Dissertations, Reports and Articles
 ---
 languages: LaTeX
 ---
-version: 20260416
+version: 20260419
 ---
-pub_date: 2026-04-16
+pub_date: 2026-04-19
 ---
 author: Stéphane Galland:https://github.com/gallandarakhneorg
 ---
@@ -97,5 +97,4 @@ The names of the Ubuntu packages that could be installed are given in the tables
    sudo mktexlsr
    sudo update-updmap --quiet
    ```
-
 

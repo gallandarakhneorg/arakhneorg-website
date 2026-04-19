@@ -1,0 +1,15 @@
+title: TeX-templates 20260419
+---
+pub_date: 2026-04-19
+---
+page: /latex/tex-templates
+---
+description:
+
+This version of TeX-templates includes changes related to recommandations from CTAN:
+
+* Ensure that filenames are not duplicated between the different distributed archives.
+* Ensure that module names are consistent among the source code and the documentation.
+* Ensure that module version is consistent among the source code and the documentation.
+* Adapt the `setup.py` to reflect all these recommandations.
+
