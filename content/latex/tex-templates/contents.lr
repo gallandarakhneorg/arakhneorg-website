@@ -62,7 +62,7 @@ TeX-templates provides the styles for writing the technical reports.
 
 | Description | Info | Examples | Ubuntu |
 |-------------|------|----------|--------|
-| [CIAD Laboratory](https://ciad-lab.fr) at [UTBM](http://www.utbm.fr) | Documentation and examples are included: [**Download**](../../download/latex/reports/utbmciadreport-2025.tar.gz) - [**Tutorial**](./report_tutorial.html) | ![front](./ciadreport_frontcover.jpg) ![page](./ciadreport_page.jpg) ![page](./ciadreport_backcover.jpg) | `tex-templates-utbmciadreport-2025` |
+| [CIAD Laboratory](https://ciad-lab.fr) at [UTBM](http://www.utbm.fr) | Documentation and examples are included: [**Download**](../../download/latex/reports/utbmciadreport-2025.tar.gz) - [**Tutorial**](./report_tutorial.html) [ ![Available on CTAN](/img/available_on_ctan.png) ](https://ctan.org/pkg/utbmciad-report) | ![front](./ciadreport_frontcover.jpg) ![page](./ciadreport_page.jpg) ![page](./ciadreport_backcover.jpg) | `tex-templates-utbmciadreport-2025` |
 
 
 ### 4. Scientific Articles
