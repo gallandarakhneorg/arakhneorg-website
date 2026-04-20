@@ -1,0 +1,30 @@
+title: TeX-templates 20260420
+---
+pub_date: 2026-04-20
+---
+page: /latex/tex-templates
+---
+description:
+
+**THIS IS A MAJOR REVISION**
+
+### Major Change
+
+The project is divided into two parts: one for the free software modules and one for nonfree modules. In this way, the material (in `src/` folder) that is released under the LGPLv3 is clearly separated from the material (in `logos/` and `fonts/` folders) published with a nonfree license.
+
+### Other changes
+
+* **All:** Fixing the invalid LaTeX declarations of classes and packages in the `.sty` and `.cls` files.
+* **CIAD Beamer:** It is now possible to change the title slide to obtain a typical title page for scientific conference presentation.
+* **CIAD Beamer:** Fixing the computation of the random background picture which generated LaTeX error.
+
+### For Contributors
+
+* Add tests for the different modules.
+* Avoid multiple entries for the same file in the archives.
+* Add colored log messages in `setup.py`.
+* Remove dependency to personal building script for Debian packages.
+* The script `setup.py` is generated `debian/rules` of pre-/post-scripts for Debian packages.
+* Generate thee source distribution archives that is compliant with CTAN.
+
+

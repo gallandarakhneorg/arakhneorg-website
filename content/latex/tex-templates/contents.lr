@@ -4,9 +4,9 @@ subtitle: LaTeX Themes for Slides, PhD Dissertations, Reports and Articles
 ---
 languages: LaTeX
 ---
-version: 20260419
+version: 20260420
 ---
-pub_date: 2026-04-19
+pub_date: 2026-04-20
 ---
 author: Stéphane Galland:https://github.com/gallandarakhneorg
 ---
@@ -74,19 +74,52 @@ TeX-templates provides the styles for writing articles for specific events.
 | IngéDoc at [UTBM](http://www.utbm.fr) " | Documentation and examples are included: [download]({{ this.github }}/papers/ingedoc) | ![front](./ingedoc.jpg) | `tex-templates-ingedoc` |
 
 
-### 5. Installation
+### 5. Licensing
 
-#### 5.1. Inside the folder of your document
+This software contains three distinct types of material:
+
+1. LaTeX source code (all files that are under the `src/` directory and any documentation source files).
+2. University and institutions logo images (all files under the `logos/` directory).
+3. Font Collections owned by an university and institution (all files under the `fonts/` directory).
+
+Licensing terms for each part are different:
+
+#### 5.1. LaTeX source code
+
+The LaTeX source code is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+A copy of the GNU Lesser General Public License (LGPLv3) is provided in the file `LICENSE.LGPLv3`.  You can also find it at https://www.gnu.org/licenses/lgpl-3.0.html
+
+#### 5.2. University and institution logos
+
+The logo files are not licensed under the LGPLv3. They are the property of their respective university or institution and are included with permission for redistribution only as part of this complete package. They may NOT be modified, altered, or extracted and used separately without explicit written permission from the owning university or institution.
+
+The exact terms governing the logos are set forth in the file `logos/LICENSE.logos`. By redistributing this package, you agree to abide by those terms.
+
+#### 5.3. University and institution font collections
+
+The font files are not licensed under the LGPLv3. They are the property of their respective university or institution and are included with permission for redistribution only as part of this complete package. They may NOT be modified, altered, or extracted and used separately without explicit written permission from the owning university or institution.
+
+The exact terms governing the logos are set forth in the file `fonts/LICENSE.fonts`. By redistributing this package, you agree to abide by those terms.
+
+#### 5.4. Overall distribution
+
+When redistributing this package (e.g., on CTAN, a personal website, or a CDN), you must preserve the directory structure and all accompanying license files.  Users of the LaTeX code may remove the `logos/` and `fonts/` directories without affecting their rights under the LGPLv3.
+
+
+### 6. Installation
+
+#### 6.1. Inside the folder of your document
 
 The most simple way to use the templates is to download the archive and uncompress it in the folder of your document. LaTeX will automatically find the template's files in the folder of your LaTeX document.
 
-#### 5.3. Inside your operating system with Ubuntu packages
+#### 6.3. Inside your operating system with Ubuntu packages
 
 {{ config.PROJECT.name }} provides several [Ubuntu packages]({{ this.ubuntu }}) for automatically install the TeX-templates parts on the system. To configure the use of the {{ config.PROJECT.name }} Ubuntu repository, you have to follow the information provided on the [dedicated page]({{ this.ubuntu }}).
 
 The names of the Ubuntu packages that could be installed are given in the tables above.
 
-#### 5.2. In the operating system by hand
+#### 6.2. In the operating system by hand
 
 1. For the report and dissertation styles, first, install [TeX-UPmethodology](../tex-upmethodology) (also available on CTAN, and included in the major TeX distributions)
 2. Download the archive of TeX-templates and uncompress it.
