@@ -33,7 +33,7 @@ TeX-templates provides styles for creating slides with the Beamer tool.
 
 | Description | Info | Examples | Ubuntu |
 |-------------|------|----------|--------|
-| [CIAD Laboratory](https://ciad-lab.fr) located at the [Université de Technologie de BelfortMontbéliard](http://www.utbm.fr) and the [Université Bourgogne Europe](http://www.ube.fr) |  Documentation and example are included: [**Download**](../../download/latex/slides - beamer/ciadslides.tar.gz) - [**Tutorial**](./ciadslides_tutorial.html) | ![front 1](./ciadslides_front.jpg) ![front 2](./ciadslides_phd_front.jpg) ![front 3](./ciadslides_conf_front.jpg) ![page](./ciadslides_page.jpg) | `tex-templates-ciad-beamer` |
+| [CIAD Laboratory](https://ciad-lab.fr) located at the [Université de Technologie de BelfortMontbéliard](http://www.utbm.fr) and the [Université Bourgogne Europe](http://www.ube.fr) |  Documentation and example are included: [**Download**](../../download/latex/slides - beamer/ciadslides.tar.gz) - [**Tutorial**](./ciadslides_tutorial.html)<br/>[ ![Also available on CTAN](/img/available_on_ctan.svg) ](https://ctan.org/pkg/ciad-beamertheme) | ![front 1](./ciadslides_front.jpg) ![front 2](./ciadslides_phd_front.jpg) ![front 3](./ciadslides_conf_front.jpg) ![page](./ciadslides_page.jpg) | `tex-templates-ciad-beamer` |
 
 
 ### 2. PhD Dissertations
@@ -62,7 +62,7 @@ TeX-templates provides the styles for writing the technical reports.
 
 | Description | Info | Examples | Ubuntu |
 |-------------|------|----------|--------|
-| [CIAD Laboratory](https://ciad-lab.fr) at [UTBM](http://www.utbm.fr) | Documentation and examples are included: [**Download**](../../download/latex/reports/utbmciadreport-2025.tar.gz) - [**Tutorial**](./report_tutorial.html) [ ![Also available on CTAN](/img/available_on_ctan.svg) ](https://ctan.org/pkg/utbmciad-report) | ![front](./ciadreport_frontcover.jpg) ![page](./ciadreport_page.jpg) ![page](./ciadreport_backcover.jpg) | `tex-templates-utbmciadreport-2025` |
+| [CIAD Laboratory](https://ciad-lab.fr) at [UTBM](http://www.utbm.fr) | Documentation and examples are included: [**Download**](../../download/latex/reports/utbmciadreport-2025.tar.gz) - [**Tutorial**](./report_tutorial.html)<br/>[ ![Also available on CTAN](/img/available_on_ctan.svg) ](https://ctan.org/pkg/utbmciad-report) | ![front](./ciadreport_frontcover.jpg) ![page](./ciadreport_page.jpg) ![page](./ciadreport_backcover.jpg) | `tex-templates-utbmciadreport-2025` |
 
 
 ### 4. Scientific Articles
