@@ -1,0 +1,33 @@
+title: AutoLaTeX 51.1
+---
+pub_date: 2026-04-21
+---
+page: /latex/autolatex
+---
+description:
+
+### SVG Translator - Bug fix
+
+* Introduce the utility class 'SvgUtils" for generating layered figures from SVG layers.
+* Add Beamer class that provides functions for parsing the overlay specifications from Beamer.
+* Re-implement the SVG translators from layered SVG for using the just introduced SvgUtils class.
+
+### Documentation
+
+* Replace the Perl POD manual by a Markdown manual, and use pandoc to generate all the associated documentation files (README...).
+* Specify the time unit for sleep duration in the documentation.
+* Update the building process figure in the documentation.
+* Update the SOTA table.
+* With `setup.py`, create a PDF for the documentation.
+
+### Developers and Contributors
+
+#### Packaging
+
+* In `setup.py`, create a Bash script for developpers named `autolatex.sh`.
+* Fixing documentation and packaging according to CTAN requirements.
+
+#### Tests
+
+* Remove hard-coded version from configobj_test.
+

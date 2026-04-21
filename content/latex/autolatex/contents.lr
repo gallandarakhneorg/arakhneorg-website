@@ -4,9 +4,9 @@ subtitle: Automatic building large and small LaTeX documents
 ---
 languages: Python 3, LaTeX
 ---
-version: 51.0
+version: 51.1
 ---
-pub_date: 2026-04-13
+pub_date: 2026-04-21
 ---
 author: Stephane Galland:https://github.com/gallandarakhneorg
 ---
