@@ -1,0 +1,13 @@
+title: TeX-templates 20260423
+---
+pub_date: 2026-04-23
+---
+page: /latex/tex-templates
+---
+description:
+
+Two changes have been applied to the TeX-templates project:
+
+1. The project structure is refactored for clearly separatin the LaTeX source code (in `tex/` folder) and the documentation files (in `doc/` folder).
+2. The documentation of `utbmciadreport` is fixed and the errors inside have been removed.
+
