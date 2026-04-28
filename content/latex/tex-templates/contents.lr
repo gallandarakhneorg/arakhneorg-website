@@ -33,7 +33,7 @@ TeX-templates provides styles for creating slides with the Beamer tool.
 
 | Description | Info | Examples | Ubuntu |
 |-------------|------|----------|--------|
-| [CIAD Laboratory](https://ciad-lab.fr) located at the [Université de Technologie de BelfortMontbéliard](http://www.utbm.fr) and the [Université Bourgogne Europe](http://www.ube.fr) |  Documentation and example are included: [**Download**](../../download/latex/slides - beamer/ciadslides.tar.gz) - [**Tutorial**](./ciadslides_tutorial.html)<br/>[ ![Also available on CTAN](/img/available_on_ctan.svg) ](https://ctan.org/pkg/ciad-beamertheme) | ![front 1](./ciadslides_front.jpg) ![front 2](./ciadslides_phd_front.jpg) ![front 3](./ciadslides_conf_front.jpg) ![page](./ciadslides_page.jpg) | `tex-templates-ciad-beamer` |
+| [CIAD Laboratory](https://ciad-lab.fr) located at the [Université de Technologie de BelfortMontbéliard](http://www.utbm.fr) and the [Université Bourgogne Europe](http://www.ube.fr) |  Documentation and example are included: [**Download**](../../download/latex/slides - beamer/ciadslides.tar.gz) - [**Tutorial**](./ciadslides_tutorial.html) - [**Example of Presentation**](https://github.com/gallandarakhneorg/mas-lesson)<br/>[ ![Also available on CTAN](/img/available_on_ctan.svg) ](https://ctan.org/pkg/ciad-beamertheme) | ![front 1](./ciadslides_front.jpg) ![front 2](./ciadslides_phd_front.jpg) ![front 3](./ciadslides_conf_front.jpg) ![page](./ciadslides_page.jpg) | `tex-templates-ciad-beamer` |
 
 
 ### 2. PhD Dissertations
