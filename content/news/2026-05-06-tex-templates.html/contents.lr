@@ -1,0 +1,19 @@
+title: TeX-templates 20260506
+---
+pub_date: 2026-05-06
+---
+page: /latex/tex-templates
+---
+description:
+
+- The project structure was refactory to separated the TeX code (in the folder `tex`) and the documentation resources (in the folder `doc`).
+- **Add a `subtitle=` option to the `\part` command**  
+  This lets you specify a subtitle for a part section.  
+  *Example:* `\part[subtitle=My Subtitle]{Part Title}`
+
+- **Improve multilingual file inclusion**  
+  The command `\localized\input{f}` now looks for a file whose name includes the current language code.  
+  1. It first tries `f_<lang>.tex` (where `<lang>` is the active language code, e.g. `fr` for French).  
+  2. If that file does not exist, it falls back to `f.tex`.  
+  *Example:* If the current language is French, `\localized\input{introduction}` attempts to load `introduction_fr.tex`; if not found, it loads `introduction.tex`.
+

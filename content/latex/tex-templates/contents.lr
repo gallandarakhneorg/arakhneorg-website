@@ -4,9 +4,9 @@ subtitle: LaTeX Themes for Slides, PhD Dissertations, Reports and Articles
 ---
 languages: LaTeX
 ---
-version: 20260423
+version: 20260506
 ---
-pub_date: 2026-04-23
+pub_date: 2026-05-06
 ---
 author: Stéphane Galland:https://github.com/gallandarakhneorg
 ---
@@ -14,7 +14,7 @@ github: https://github.com/gallandarakhneorg/tex-templates/
 ---
 github_name: tex-templates
 ---
-documentation: Documentation for CIAD Slides:/download/latex/slides - beamer/documentation.pdf
+documentation: Documentation for CIAD Slides:/download/latex/slides - beamer/ciadbeamer-documentation.pdf
 ---
 ubuntu: ../../linux/ubuntu
 ---
