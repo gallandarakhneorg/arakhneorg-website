@@ -1,12 +1,13 @@
-title: TeX-templates 20260506
+title: TeX-templates 20260509
 ---
-pub_date: 2026-05-06
+pub_date: 2026-05-09
 ---
 page: /latex/tex-templates
 ---
 description:
 
 - The project structure was refactory to separated the TeX code (in the folder `tex`) and the documentation resources (in the folder `doc`).
+
 - **Add a `subtitle=` option to the `\part` command**  
   This lets you specify a subtitle for a part section.  
   *Example:* `\part[subtitle=My Subtitle]{Part Title}`
@@ -16,4 +17,10 @@ description:
   1. It first tries `f_<lang>.tex` (where `<lang>` is the active language code, e.g. `fr` for French).  
   2. If that file does not exist, it falls back to `f.tex`.  
   *Example:* If the current language is French, `\localized\input{introduction}` attempts to load `introduction_fr.tex`; if not found, it loads `introduction.tex`.
+
+- **Fixing the text for the outline slides' titles**  
+  The command `\outlinetitlelabel` is defined for ensuring that the "Outline" is correctly translated in the frame's titles.
+
+- ** Fixing the definition of the localized labels**
+  The names of the languages are fixed to have a correct localized label.
 

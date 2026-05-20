@@ -1,0 +1,11 @@
+title: TeX-templates 20260520
+---
+pub_date: 2026-05-20
+---
+page: /latex/tex-templates
+---
+description:
+
+- **CIAD Beamer**
+  The size of the text in the side notes (usually set with `\sidenote{}` or `\sidecite{}` is dynamically computer in order to have the context fitting the graphical area allocated to the side nodes. This adapated concerns the size of the font to lower size.
+
